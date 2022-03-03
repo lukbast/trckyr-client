@@ -1,6 +1,7 @@
 import { useState } from 'react';
-import './App.css';
+import './App.scss';
 import LoginPage from './components/login-page/login-page';
+import MainWindow from './components/main-window/main-window';
 
 function App():JSX.Element {
 
@@ -8,7 +9,7 @@ function App():JSX.Element {
 
   return (
       <>{
-        loggedIn? "": <LoginPage hider={setLoggedIn}/>
+        loggedIn? <MainWindow/>: <LoginPage hider={setLoggedIn}/>
         
       }</>
   )

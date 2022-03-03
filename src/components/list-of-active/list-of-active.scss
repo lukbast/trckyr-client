@@ -1,0 +1,22 @@
+.main-list{
+    width: 20%;
+    height: 90%;
+
+    position: absolute;
+    top: 10%;
+    left: 0;
+
+    overflow-y: scroll;
+    overflow-x: hidden;
+    display: inline-block;
+
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+
+    background-color: blue;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.main-list::-webkit-scrollbar {
+    display: none;
+  }
