@@ -1,20 +1,47 @@
+import { useState } from "react"
 import Button from "../button/button"
 import Input from "../input/input"
 
 import "./login-page.scss"
 
-const LoginPage:React.FC = () =>{
+interface IState{
+    formData:{
+        username: string,
+        password: string
+    }
+}
+
+interface IProps{
+    hider: any
+}
+
+const LoginPage:React.FC<IProps> = ({hider}):JSX.Element =>{
+
+    const [state, setState] = useState<IState["formData"]>({username:"", password:""})
+
+    const changeListener = (e: React.ChangeEvent<HTMLInputElement>) =>{
+        setState({...state,
+            [e.target.name]: e.target.value
+        })
+        console.log(state)
+    }
+
+    const btnClickClistener = () =>{
+        hider(true)
+    }
+
     return(
         <div className="login-page">
             <div className="login-box">
 
                 <label className="label">Username</label>
-                <Input type="password" name="password"/>
+                <Input onChange={changeListener} type="text" name="username"/>
+
 
                 <label className="label">Password</label>
-                <Input type="text" name="username"/>
+                <Input onChange={changeListener} type="password" name="password"/>
 
-                <Button text="Log in"/>
+                <Button onClick={btnClickClistener} text="Log in"/>
             </div>
         </div>
     )

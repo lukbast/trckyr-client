@@ -2,12 +2,13 @@ import { FC } from "react"
 import "./button.scss"
 
 interface IButtonProps {
-    text: string
+    text: string,
+    onClick: any
 }
 
-const Button:FC<IButtonProps> = ({text}) =>{
+const Button:FC<IButtonProps> = ({text, onClick}):JSX.Element =>{
     return(
-        <button className="button">{text}</button>
+        <button className="button" onClick={onClick}>{text}</button>
     )
 }
 

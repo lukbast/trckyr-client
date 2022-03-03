@@ -4,11 +4,12 @@ import "./input.scss"
 interface IProps {
     type: string,
     name: string
+    onChange: any
 }
 
-const Input:FC<IProps> = ({type, name}) =>{
+const Input:FC<IProps> = ({type, name, onChange}):JSX.Element =>{
     return(
-        <input className="input" name={name} type={type}/>
+        <input onChange={(e) => {onChange(e)}} className="input" name={name} type={type}/>
     )
 }
 
