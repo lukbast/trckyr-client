@@ -5,7 +5,7 @@ import MainWindow from './components/main-window/main-window';
 
 function App():JSX.Element {
 
-  const [loggedIn, setLoggedIn] = useState<boolean>(false)
+  const [loggedIn, setLoggedIn] = useState<boolean>(true)
 
   return (
       <>{
