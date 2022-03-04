@@ -1,6 +1,8 @@
 import { useState } from "react"
+import { User } from "../../App"
 import Button from "../button/button"
 import Input from "../input/input"
+
 
 import "./login-page.scss"
 
@@ -12,10 +14,11 @@ interface IState{
 }
 
 interface IProps{
-    hider: any
+    setUser: any
+    user: User
 }
 
-const LoginPage:React.FC<IProps> = ({hider}):JSX.Element =>{
+const LoginPage:React.FC<IProps> = ({setUser, user}):JSX.Element =>{
 
     const [state, setState] = useState<IState["formData"]>({username:"", password:""})
 
@@ -27,7 +30,7 @@ const LoginPage:React.FC<IProps> = ({hider}):JSX.Element =>{
     }
 
     const btnClickClistener = () =>{
-        hider(true)
+        setUser({...user, username: state.username})
     }
 
     return(

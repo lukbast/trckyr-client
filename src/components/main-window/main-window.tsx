@@ -4,11 +4,17 @@ import MainTab from "../main-tab/main-tab"
 import MenuBar from "../menu-bar/menu-bar"
 import "./main-window.scss"
 
+interface IProps{
+    user: {
+        username: string
+    }
+    logOut: any
+}
 
-const MainWindow:FC = ():JSX.Element =>{
+const MainWindow:FC<IProps> = ({user, logOut}):JSX.Element =>{
     return(
         <div className="main-window">
-            <MenuBar/>
+            <MenuBar user={user} logOut={logOut}/>
             <ListOfActive/>
             <MainTab/>
             
