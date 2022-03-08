@@ -1,7 +1,7 @@
-import { FC, useState } from "react"
+import { FC } from "react"
 import { useSelectedTransport } from "../../context/selected-transport-context"
 import { useWindowState } from "../../context/window-context"
-import { exampleState } from "../main-window/main-window"
+import { exampleState } from "../main-window/tempState"
 import TransportTile from "../transport-tile/transport-tile"
 import "./list-of-active.scss"
 
@@ -21,11 +21,11 @@ const ListOfActive:FC<IProps> = ({data}):JSX.Element =>{
 
     const renderList = () =>{
         const temp = []
-        for (let i = 0; i< 8; i++){
+        for (let i = 0; i< data.length; i++){
             if(i === selectedTransport.state.index){
-                temp.push(<TransportTile key={i} changer={changer} isSelelected={true} data={data} index={i}/>)
+                temp.push(<TransportTile key={i} changer={changer} isSelelected={true} data={data[i]} index={i}/>)
             } else{
-                temp.push(<TransportTile key={i} changer={changer} isSelelected={false} data={data} index={i}/>)
+                temp.push(<TransportTile key={i} changer={changer} isSelelected={false} data={data[i]} index={i}/>)
             }
         }
         return temp

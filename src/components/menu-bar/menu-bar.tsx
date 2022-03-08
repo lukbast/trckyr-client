@@ -20,7 +20,6 @@ const MenuBar:FC<IProps> = ({user, logOut}):JSX.Element =>{
                 <MenuBarButton text="New transport" onClick={() =>{dispatch("openNewTransport")}}/>
                 <MenuBarButton text="New driver" onClick={() =>{dispatch("openNewDriver")}}/>
                 <MenuBarButton text="New cargo" onClick={() =>{dispatch("openNewCargo")}}/>
-                {console.log(state)}
             </div>
             <div className="bar-logout-container">
                 <div>{`Logged as : ${user.username}`}</div>

@@ -1,8 +1,14 @@
 import { FC } from "react"
 import { useWindowState } from "../../context/window-context"
+import TransportWindow from "../transport-window/transport-window"
+import { ITransportData } from "./interfaces"
 import "./main-tab.scss"
 
-const MainTab:FC = ():JSX.Element =>{
+interface IProps {
+    transportData: ITransportData
+}
+
+const MainTab:FC<IProps> = ({transportData}):JSX.Element =>{
 
     const {state, dispatch} = useWindowState()
 
@@ -15,7 +21,7 @@ const MainTab:FC = ():JSX.Element =>{
         } else if (state.newCargo) {
             return <div style={{color: "white"}}>NEW CARGO WINDOW OPENED</div>
         }
-        return <div style={{color: "white"}}>TRANSPORT WINDOW OPENED</div>
+        return <TransportWindow data={transportData}/>
     }
 
     return(
