@@ -1,4 +1,5 @@
 import { FC } from "react"
+import { useWindowState } from "../context/window-context"
 import ListOfActive from "../list-of-active/list-of-active"
 import MainTab from "../main-tab/main-tab"
 import MenuBar from "../menu-bar/menu-bar"
@@ -14,6 +15,7 @@ interface IProps{
 const MainWindow:FC<IProps> = ({user, logOut}):JSX.Element =>{
     return(
         <div className="main-window">
+
             <MenuBar user={user} logOut={logOut}/>
             <ListOfActive/>
             <MainTab/>

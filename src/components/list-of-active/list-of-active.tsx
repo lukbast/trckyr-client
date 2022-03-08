@@ -1,8 +1,12 @@
 import { FC, useState } from "react"
+import { useWindowState } from "../context/window-context"
 import TransportTile from "../transport-tile/transport-tile"
 import "./list-of-active.scss"
 
 const ListOfActive:FC = ():JSX.Element =>{
+
+    const {state, dispatch} = useWindowState()
+
 
     const example_state = {
         name: "Chocholate bars for babushka",
@@ -21,6 +25,7 @@ const ListOfActive:FC = ():JSX.Element =>{
 
     const changer = (index:number) =>{
         setSelected(index)
+        dispatch("openTransport")
     }
 
     const renderList = () =>{
