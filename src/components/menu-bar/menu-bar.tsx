@@ -1,6 +1,6 @@
 import { FC } from "react"
 import { User } from "../../App"
-import { useWindowState } from "../context/window-context"
+import { useWindowState } from "../../context/window-context"
 import MenuBarButton from "../menu-bar-button/menu-bar-button"
 import "./menu-bar.scss"
 
