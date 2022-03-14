@@ -1,5 +1,5 @@
 import { FC } from "react"
-import { ITransportData } from "../main-tab/interfaces"
+import { ITransportData } from "../../interfaces"
 import "./transport-window.scss"
 
 interface IProps {

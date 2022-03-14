@@ -37,12 +37,10 @@ const LoginPage:React.FC<IProps> = ({setUser, user}):JSX.Element =>{
         <div className="login-page">
             <div className="login-box">
 
-                <label className="label">Username</label>
-                <Input onChange={changeListener} type="text" name="username"/>
+                <Input onChange={changeListener} type="text" name="username" labelText="Username" length="long"/>
 
 
-                <label className="label">Password</label>
-                <Input onChange={changeListener} type="password" name="password"/>
+                <Input onChange={changeListener} type="password" name="password" labelText="Password" length="long"/>
 
                 <Button onClick={btnClickClistener} text="Log in"/>
             </div>

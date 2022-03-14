@@ -3,13 +3,18 @@ import "./input.scss"
 
 interface IProps {
     type: string,
-    name: string
+    name: string,
+    labelText: string,
+    length: "short" | "long"
     onChange: any
 }
 
-const Input:FC<IProps> = ({type, name, onChange}):JSX.Element =>{
+const Input:FC<IProps> = ({type, name,labelText, onChange,length}):JSX.Element =>{
     return(
-        <input onChange={(e) => {onChange(e)}} className="input" name={name} type={type}/>
+        <div className="input-label-group">
+            <label className="label">{labelText}</label>
+            <input onChange={(e) => {onChange(e)}} className={`input ${length}`} name={name} type={type}/>
+        </div>
     )
 }
 

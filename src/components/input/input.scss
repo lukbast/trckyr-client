@@ -1,4 +1,21 @@
-.input{
-    margin: 20px 0px;
-    width: 70%;
+.input-label-group{
+    display: flex;
+    flex-direction: column;
+    margin-right: 2.5vw;
+    width: fit-content;
+    
+    .label{
+        width: fit-content;
+    } 
+
+    .input{
+        margin: 20px 0px;
+    }
+    .long{
+        width: 23vw;
+    }
+    .short{
+        width: 10vw;
+    }
 }
+

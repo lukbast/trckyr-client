@@ -18,8 +18,8 @@ const MenuBar:FC<IProps> = ({user, logOut}):JSX.Element =>{
         <div className="menu-bar">
             <div className="bar-button-container">
                 <MenuBarButton text="New transport" onClick={() =>{dispatch("openNewTransport")}}/>
-                <MenuBarButton text="New driver" onClick={() =>{dispatch("openNewDriver")}}/>
-                <MenuBarButton text="New cargo" onClick={() =>{dispatch("openNewCargo")}}/>
+                <MenuBarButton text="Manage drivers" onClick={() =>{dispatch("openNewDriver")}}/>
+                <MenuBarButton text="Manage cargos" onClick={() =>{dispatch("openNewCargo")}}/>
             </div>
             <div className="bar-logout-container">
                 <div>{`Logged as : ${user.username}`}</div>
