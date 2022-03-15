@@ -1,6 +1,6 @@
 import { FC } from "react"
 import { useWindowState } from "../../context/window-context"
-import NewCargoWindow from "../new-cargo-window/new-cargo-window"
+import NewCargoWindow from "../manage-cargos-window/manage-cargos-window"
 import TransportWindow from "../transport-window/transport-window"
 import { ITransportData } from "../../interfaces"
 import "./main-tab.scss"

@@ -1,0 +1,18 @@
+.new-cargo-form{
+    margin-top: 50px;
+    width: 80%;
+        
+    .input-group{
+        display: flex;
+        max-width: 23vw;
+        min-width: 23vw;
+        justify-content: space-between;
+       
+    }
+
+    .button-div{
+        display: flex;
+        max-width: 23vw;
+        min-width: 23vw;
+    }
+}
