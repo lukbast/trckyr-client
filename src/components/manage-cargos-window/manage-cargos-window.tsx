@@ -1,5 +1,5 @@
-import { FC, useState } from "react"
-import { ICargoData } from "../../interfaces"
+import { FC } from "react"
+import { useCargoContext } from "../../context/cargo-context"
 import CargoList from "../cargo-list/cargo-list"
 import NewCargoForm from "../new-cargo-form/new-cargo-form"
 import Subwindow from "../subwindow/subwindow"
@@ -7,36 +7,15 @@ import "./manage-cargos-window.scss"
 
 
 
-const exampleState:ICargoData[] = [
-    {name: "Chocolate bars",
-    weight: 10000,
-    weightUnit: "kg",
-    quantity: 1000000,
-    quantityUnit: "pcs",
-    info: "" },
-    {name: "Cars",
-    weight: 20000,
-    weightUnit: "kg",
-    quantity: 6,
-    quantityUnit: "pcs",
-    info: "" },
-    {name: "Windows",
-    weight: 8000,
-    weightUnit: "kg",
-    quantity: 1000,
-    quantityUnit: "pcs",
-    info: "Fragile" },
-] 
-
 
 const NewCargoWindow:FC = ():JSX.Element =>{
 
-    const [state, setState] = useState(exampleState)
+    const {state, dispatch} = useCargoContext()
 
 
     return(
         <div className="manage-cargo-window">
-            <CargoList data={state}/>
+            <CargoList data={state.data}/>
             <Subwindow>
                 <NewCargoForm/>
             </Subwindow>
