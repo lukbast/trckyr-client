@@ -2,12 +2,12 @@ import { FC } from "react"
 import "./subwindow.scss"
 
 interface IProps {
-    children: FC
+    children: JSX.Element
 }
 
 const Subwindow:FC<IProps> = ({children}):JSX.Element =>{
     return(
-        <div className="Subwindow">
+        <div className="subwindow">
             {children}
         </div>
     )

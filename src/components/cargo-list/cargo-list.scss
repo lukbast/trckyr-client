@@ -1,0 +1,21 @@
+.cargo-list{
+    width: 50%;
+    height: 100%;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+
+
+}
+
+
+.table{
+    width: 100%;
+    border: 1px solid;
+    border-collapse: collapse;
+
+
+    th, td {
+        height: 40px;
+      }
+}
