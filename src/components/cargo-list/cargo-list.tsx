@@ -3,12 +3,8 @@ import { ActionTypes, useCargoDataContext } from "../../context/cargo-data-conte
 import { ICargoData } from "../../interfaces"
 import "./cargo-list.scss"
 
-interface IProps {
-    data: ICargoData[]
-}
 
-
-const CargoList:FC<IProps> =  ({data}):JSX.Element =>{
+const CargoList:FC =  ():JSX.Element =>{
 
     const cargoDataContext = useCargoDataContext()
 
@@ -26,7 +22,7 @@ const CargoList:FC<IProps> =  ({data}):JSX.Element =>{
                 </tr>
               </thead>
                 <tbody>
-                  {data.map((val, key) => {
+                  {cargoDataContext.state.data.map((val, key) => {
                     return (
                       <tr onClick={ () => {removeItem(val)}} key={key}>
                         <td>{val.name}</td>
