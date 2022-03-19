@@ -31,7 +31,7 @@ interface ICargoWindowProviderProps{
 
 const CargoWindowContext = createContext<ICargoWindowContext>({state: defaultState, dispatch: () => undefined})
 
-function cargoWidnowReducer (state: State, action: IAction):State {
+function cargoWindowReducer (state: State, action: IAction):State {
     switch (action.type){
         case ActionTypes.SHOW_SELECTED:
             return({
@@ -59,7 +59,7 @@ function cargoWidnowReducer (state: State, action: IAction):State {
 
 
 export function CargoWindowProvider(props: ICargoWindowProviderProps) {
-    const [state, dispatch] = useReducer(cargoWidnowReducer, defaultState)
+    const [state, dispatch] = useReducer(cargoWindowReducer, defaultState)
 
     return (
         <CargoWindowContext.Provider value={{state, dispatch}}>

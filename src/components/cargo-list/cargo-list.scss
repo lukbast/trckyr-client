@@ -26,6 +26,9 @@
         tr {
             cursor: pointer;
         }
+        .selected{
+            background-color: brown;
+        }
 
         tr:hover{
             background-color: rgb(170, 238, 250);

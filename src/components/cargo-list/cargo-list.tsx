@@ -1,38 +1,41 @@
 import { FC } from "react"
-import { ActionTypes, useCargoDataContext } from "../../context/cargo-data-context"
-import { ICargoData } from "../../interfaces"
+import { useCargoDataContext } from "../../context/cargo-data-context"
+import { useCargoWindowContext, ActionTypes as WindowActionTypes } from "../../context/cargo-window-context"
 import "./cargo-list.scss"
 
 
 const CargoList:FC =  ():JSX.Element =>{
 
-    const cargoDataContext = useCargoDataContext()
+  const cargoDataContext = useCargoDataContext()
+  const cargoWindowContext = useCargoWindowContext()
 
 
-    const removeItem = (item: ICargoData) =>{
-      cargoDataContext.dispatch({type: ActionTypes.DELETE_CARGO, payload:item})
-    }
+  const onItemCLick = (id: number) => {
+    cargoWindowContext.dispatch({type:WindowActionTypes.SHOW_SELECTED, payload: id})
+    console.log(cargoWindowContext.state)
+  }
 
-    return (
-        <div className="cargo-list">
-            <table className="table">
-              <thead>
-                <tr>
-                  <th>Name</th>
-                </tr>
-              </thead>
-                <tbody>
-                  {cargoDataContext.state.data.map((val, key) => {
-                    return (
-                      <tr onClick={ () => {removeItem(val)}} key={key}>
-                        <td>{val.name}</td>
-                      </tr>
-                    )
-                  })}
-              </tbody>
-            </table>
-        </div>
-    )
+  return (
+      <div className="cargo-list">
+          <table className="table">
+            <thead>
+              <tr>
+                <th>Name</th>
+              </tr>
+            </thead>
+              <tbody>
+                {cargoDataContext.state.data.map((val, key) => {
+                  return (
+                    <tr className={cargoWindowContext.state.selected === val._id? "selected": ""} 
+                    onClick={() =>{ onItemCLick(val._id)}} key={key}>
+                      <td>{val.name}</td>
+                    </tr>
+                  )
+                })}
+            </tbody>
+          </table>
+      </div>
+  )
 }
 
 
