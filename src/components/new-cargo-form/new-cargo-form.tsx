@@ -1,9 +1,7 @@
 import { FC, useState } from "react"
 import { ActionTypes, useCargoDataContext } from "../../context/cargo-data-context"
 import { ICargoData } from "../../interfaces"
-import Button from "../button/button"
-import Input from "../input/input"
-import "./new-cargo-form.scss"
+import CargoForm from "../cargo-form/cargo-form"
 
 
 const NewCargoForm:FC = ():JSX.Element =>{
@@ -34,22 +32,7 @@ const NewCargoForm:FC = ():JSX.Element =>{
     }
 
     return(
-        <div className="new-cargo-form">
-            <Input type="text" name="name" onChange={onChange} labelText="Name" length="long"/>
-            <div className="input-group">
-                <Input type="number" name="weight" onChange={onChange} labelText="Weigth" length="short"/>
-                <Input type="text" name="weightUnit" onChange={onChange} labelText="Unit" length="short"/>
-            </div>
-            <div className="input-group">
-                <Input type="number" name="quantity" onChange={onChange} labelText="Quantity" length="short"/>
-                <Input type="text" name="quantityUnit" onChange={onChange} labelText="Unit" length="short"/>
-            </div>
-            <Input type="text" name="info" labelText="Additional info" length="long" onChange={onChange}/>
-            <div className="button-div">
-                <Button text="Add Cargo" onClick={submit} />
-            </div>
-            
-        </div>
+        <CargoForm buttonText="New Cargo" submitFunction={submit} onChange={onChange} />
 
     )
 }

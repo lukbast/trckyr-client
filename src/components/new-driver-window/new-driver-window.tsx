@@ -1,8 +1,8 @@
 import { FC, useState } from "react"
 import { IDriverData } from "../../interfaces"
-import Button from "../button/button"
-import Input from "../input/input"
+import DriverForm from "../driver-form/driver-form"
 import "./new-driver-window.scss"
+
 
 
 const NewDriverWindow:FC = ():JSX.Element =>{
@@ -28,14 +28,7 @@ const NewDriverWindow:FC = ():JSX.Element =>{
 
     return(
         <div className="new-driver-window">
-            <div className="new-driver-window-form">
-                <Input name="name" type="text" labelText="Name" length="long" onChange={onChange} />
-                <Input name="phone" type="text" labelText="Phone" length="long" onChange={onChange} />
-                <Input name="email" type="text" labelText="email" length="long" onChange={onChange} />
-                <div className="button-div">
-                    <Button text="Add driver" onClick={submit} />
-                </div>
-            </div>
+            <DriverForm onChange={onChange} submitFunction={submit} buttonText="Dew driver" />
             
         </div>
     )
