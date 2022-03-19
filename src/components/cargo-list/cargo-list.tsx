@@ -23,11 +23,6 @@ const CargoList:FC<IProps> =  ({data}):JSX.Element =>{
               <thead>
                 <tr>
                   <th>Name</th>
-                  <th>Weigth</th>
-                  <th></th>
-                  <th>Quantity</th>
-                  <th></th>
-                  <th>Additional Info</th>
                 </tr>
               </thead>
                 <tbody>
@@ -35,11 +30,6 @@ const CargoList:FC<IProps> =  ({data}):JSX.Element =>{
                     return (
                       <tr onClick={ () => {removeItem(val)}} key={key}>
                         <td>{val.name}</td>
-                        <td>{val.weight}</td>
-                        <td>{val.weightUnit}</td>
-                        <td>{val.quantity}</td>
-                        <td>{val.quantityUnit}</td>
-                        <td>{val.info}</td>
                       </tr>
                     )
                   })}
