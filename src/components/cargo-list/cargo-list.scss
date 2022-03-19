@@ -6,16 +6,38 @@
     top: 0px;
 
 
-}
+    
 
+
+}
 
 .table{
     width: 100%;
     border: 1px solid;
     border-collapse: collapse;
 
+    thead{
+        th, td {
+            height: 40px;
+          }
+    }
 
-    th, td {
-        height: 40px;
-      }
+    tbody{
+
+        th, td {
+            height: 40px;
+        }
+
+        tr {
+            cursor: pointer;
+        }
+
+        tr:hover{
+            background-color: rgb(170, 238, 250);
+        }
+
+    }
+
+    
 }
+

@@ -30,7 +30,8 @@ const defaultState = {
 export type State  = typeof defaultState
 
 export enum ActionTypes {
-    "ADD_CARGO"
+    "ADD_CARGO",
+    "DELETE_CARGO"
 }
 
 interface IAction{
@@ -52,13 +53,28 @@ interface ICargoDataProviderProps{
 const CargoContext = createContext<ICargoDataContext>({state: defaultState, dispatch: () => undefined})
 
 function cargoReducer (state: State, action: IAction):State {
-     switch (action.type){
-         case ActionTypes.ADD_CARGO:
-             const newData = state.data
-             newData.push(action.payload)
-             return({...state,
+    switch (action.type){
+        case ActionTypes.ADD_CARGO:
+            const newData = state.data
+            newData.push(action.payload)
+            return({...state,
                 data: newData
             })
+        case ActionTypes.DELETE_CARGO:
+            const cleanedData = []
+            let i = 0
+            for (i; i < action.payload._id;  i++){
+                cleanedData.push(state.data[i])
+            }
+            i ++;
+            for (i; i < state.data.length;  i++){
+                const shiftedObject = state.data[i]
+                shiftedObject._id = i - 1
+                cleanedData.push(shiftedObject)
+            }
+            return {...state,
+            data: cleanedData}
+
      }
 }
 
