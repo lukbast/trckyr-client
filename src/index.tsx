@@ -4,15 +4,15 @@ import './index.css';
 import App from './App';
 import { WindowProvider } from './context/window-context';
 import { SelectedTransportProvider } from './context/selected-transport-context';
-import { CargoProvider } from './context/cargo-context';
+import { CargoDataProvider } from './context/cargo-data-context';
 
 ReactDOM.render(
   <React.StrictMode>
     <WindowProvider>
       <SelectedTransportProvider>
-        <CargoProvider>
+        <CargoDataProvider>
           <App />
-        </CargoProvider>
+        </CargoDataProvider>
       </SelectedTransportProvider>
     </WindowProvider>
   </React.StrictMode>,

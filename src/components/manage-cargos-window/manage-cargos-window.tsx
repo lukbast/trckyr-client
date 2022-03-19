@@ -1,5 +1,5 @@
 import { FC } from "react"
-import { useCargoContext } from "../../context/cargo-context"
+import { useCargoDataContext } from "../../context/cargo-data-context"
 import CargoList from "../cargo-list/cargo-list"
 import NewCargoForm from "../new-cargo-form/new-cargo-form"
 import Subwindow from "../subwindow/subwindow"
@@ -10,12 +10,12 @@ import "./manage-cargos-window.scss"
 
 const NewCargoWindow:FC = ():JSX.Element =>{
 
-    const {state, dispatch} = useCargoContext()
+    const cargoDataContext = useCargoDataContext()
 
 
     return(
         <div className="manage-cargo-window">
-            <CargoList data={state.data}/>
+            <CargoList data={cargoDataContext.state.data}/>
             <Subwindow>
                 <NewCargoForm/>
             </Subwindow>

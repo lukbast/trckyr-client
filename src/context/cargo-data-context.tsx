@@ -3,19 +3,22 @@ import { ICargoData } from "../interfaces";
 
 const defaultState = {
     data : [
-        {name: "Chocolate bars",
+        {_id: 0,
+        name: "Chocolate bars",
         weight: 10000,
         weightUnit: "kg",
         quantity: 1000000,
         quantityUnit: "pcs",
         info: "" },
-        {name: "Cars",
+        {_id: 1,
+        name: "Cars",
         weight: 20000,
         weightUnit: "kg",
         quantity: 6,
         quantityUnit: "pcs",
         info: "" },
-        {name: "Windows",
+        {_id: 2,
+        name: "Windows",
         weight: 8000,
         weightUnit: "kg",
         quantity: 1000,
@@ -35,18 +38,18 @@ interface IAction{
     payload: ICargoData
 }
 
-interface ICargoContext {
+interface ICargoDataContext {
     state: State,
     dispatch: React.Dispatch<IAction>
 
 }
 
-interface ICargoProviderProps{
+interface ICargoDataProviderProps{
     children: ReactNode
 }
 
 
-const CargoContext = createContext<ICargoContext>({state: defaultState, dispatch: () => undefined})
+const CargoContext = createContext<ICargoDataContext>({state: defaultState, dispatch: () => undefined})
 
 function cargoReducer (state: State, action: IAction):State {
      switch (action.type){
@@ -60,7 +63,7 @@ function cargoReducer (state: State, action: IAction):State {
 }
 
 
-export function CargoProvider(props: ICargoProviderProps) {
+export function CargoDataProvider(props: ICargoDataProviderProps) {
     const [state, dispatch] = useReducer(cargoReducer, defaultState)
 
     return (
@@ -71,7 +74,7 @@ export function CargoProvider(props: ICargoProviderProps) {
 }
 
 
-export function useCargoContext (){
+export function useCargoDataContext (){
     const context = useContext(CargoContext)
 
     if (!context) throw new Error("useCargoContext must be used inside a CargoProvider")

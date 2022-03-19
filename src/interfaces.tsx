@@ -13,7 +13,7 @@ export interface ITransportData {
 }
 
 export interface ICargoData{
-    _id?: number,
+    _id: number,
     name: string,
     weight: number,
     weightUnit: string,
