@@ -17,7 +17,7 @@ const MainTab:FC<IProps> = ({transportData}):JSX.Element =>{
 
     const display = ():JSX.Element =>{
         if (state.newTransportWindow) {
-            return <div style={{color: "white"}}>NEW TRANSPORT WINDOW OPENED</div>
+            return <div>NEW TRANSPORT WINDOW OPENED</div>
         } else if (state.newDriverWindow) {
             return <ManageDriversWindow/>
         } else if (state.newCargo) {
