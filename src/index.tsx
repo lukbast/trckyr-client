@@ -13,11 +13,9 @@ ReactDOM.render(
     <WindowProvider>
       <SelectedTransportProvider>
         <CargoDataProvider>
-          <CargoWindowProvider>
-            <DriverDataProvider>
-              <App />
-            </DriverDataProvider>
-          </CargoWindowProvider>
+          <DriverDataProvider>
+            <App />
+          </DriverDataProvider>
         </CargoDataProvider>
       </SelectedTransportProvider>
     </WindowProvider>

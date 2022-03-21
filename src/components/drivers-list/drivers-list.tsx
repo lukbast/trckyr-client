@@ -2,7 +2,7 @@ import { FC, useState } from "react"
 import { useDriverDataContext } from "../../context/driver-data-context"
 import { IDriverData } from "../../interfaces"
 import {quickSort} from "./quicksort"
-import "./drivers-list.scss"
+import { ActionTypes as WindowActions, useDriversWindowContext } from "../../context/drivers-window-context"
 
 interface IState {
     columnName: "id" | "firstName"| "lastName",
@@ -12,7 +12,12 @@ interface IState {
 const DriversList:FC = ():JSX.Element =>{
 
     const driverDataContext = useDriverDataContext()
+    const driversWindowContext = useDriversWindowContext()
     const [orderingState, setOrderingState] = useState<IState>({columnName: "id", descending:false})
+
+    const onItemCLick = (id: number) => {
+      driversWindowContext.dispatch({type:WindowActions.SHOW_SELECTED, payload: id})
+    }
 
     const sortItems = () =>{
         const data = driverDataContext.state
@@ -38,8 +43,8 @@ const DriversList:FC = ():JSX.Element =>{
 
     const renderItem =  (data:IDriverData, key:number):JSX.Element =>{
         return(
-          <tr className={""} 
-          onClick={() =>{ alert("I'm working")}} key={key}>
+          <tr className={driversWindowContext.state.selected === data._id? "selected": ""} 
+          onClick={() =>{ onItemCLick(data._id)}} key={key}>
             <td>{data._id}</td>
             <td>{data.lastName}</td>
             <td>{data.firstName}</td>
@@ -48,7 +53,7 @@ const DriversList:FC = ():JSX.Element =>{
       }
     
       const renderItems = ():JSX.Element => {
-          const sortedData = sortItems()
+        const sortedData = sortItems()
         return(  
         <tbody>
           {sortedData.map( (data) => {return renderItem(data, data._id)})}

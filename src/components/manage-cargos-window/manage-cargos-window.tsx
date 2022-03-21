@@ -8,7 +8,7 @@ import CargoPreview from "../cargo-preview/cargo-preview"
 import EditCargoForm from "../edit-cargo-form/edit-cargo-form"
 
 
-const NewCargoWindow:FC = ():JSX.Element =>{
+const ManageCargosWindow:FC = ():JSX.Element =>{
 
     const cargoWindowContext = useCargoWindowContext()
 
@@ -34,4 +34,4 @@ const NewCargoWindow:FC = ():JSX.Element =>{
     )
 }
 
-export default NewCargoWindow
+export default ManageCargosWindow
