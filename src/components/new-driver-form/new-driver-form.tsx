@@ -1,10 +1,13 @@
 import { FC, useState } from "react"
+import { ActionTypes, useDriverDataContext } from "../../context/driver-data-context"
 import { IDriverData } from "../../interfaces"
 import DriverForm from "../driver-form/driver-form"
 
 const NewDriverForm:FC = ():JSX.Element =>{
+    const driverDataContext = useDriverDataContext()
 
     const defaultState:IDriverData = {
+        _id: driverDataContext.state.length,
         firstName: "",
         lastName: "",
         phone: "",
@@ -12,6 +15,7 @@ const NewDriverForm:FC = ():JSX.Element =>{
     }
 
     const [state, setState] = useState<IDriverData>(defaultState)
+    
 
     const onChange = (e: React.ChangeEvent<HTMLInputElement>) =>{
         setState({...state,
@@ -20,7 +24,9 @@ const NewDriverForm:FC = ():JSX.Element =>{
     }
 
     const submit = () =>{
-        console.log(state)
+        driverDataContext.dispatch({type: ActionTypes.ADD_DRIVER, payload:state})
+        setState({...state,
+        _id: state._id + 1})
     }
 
 

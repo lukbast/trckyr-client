@@ -6,6 +6,7 @@ import { WindowProvider } from './context/window-context';
 import { SelectedTransportProvider } from './context/selected-transport-context';
 import { CargoDataProvider } from './context/cargo-data-context';
 import { CargoWindowProvider } from './context/cargo-window-context';
+import { DriverDataProvider } from './context/driver-data-context';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -13,7 +14,9 @@ ReactDOM.render(
       <SelectedTransportProvider>
         <CargoDataProvider>
           <CargoWindowProvider>
-            <App />
+            <DriverDataProvider>
+              <App />
+            </DriverDataProvider>
           </CargoWindowProvider>
         </CargoDataProvider>
       </SelectedTransportProvider>
