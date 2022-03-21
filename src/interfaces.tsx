@@ -23,7 +23,8 @@ export interface ICargoData{
 }
 
 export interface IDriverData{
-    name: string,
+    firstName: string,
+    lastName: string,
     phone: string,
     email: string
 }

@@ -9,7 +9,8 @@ import "./manage-drivers-window.scss"
 const ManageDriversWindow:FC = ():JSX.Element =>{
 
     const defaultState:IDriverData = {
-        name: "",
+        firstName: "",
+        lastName: "",
         phone: "",
         email: ""
     }
