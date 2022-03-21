@@ -4,7 +4,7 @@ import NewCargoWindow from "../manage-cargos-window/manage-cargos-window"
 import TransportWindow from "../transport-window/transport-window"
 import { ITransportData } from "../../interfaces"
 import "./main-tab.scss"
-import NewDriverWindow from "../new-driver-window/new-driver-window"
+import ManageDriversWindow from "../manage-drivers-window/manage-driver-window"
 
 interface IProps {
     transportData: ITransportData
@@ -19,7 +19,7 @@ const MainTab:FC<IProps> = ({transportData}):JSX.Element =>{
         if (state.newTransportWindow) {
             return <div style={{color: "white"}}>NEW TRANSPORT WINDOW OPENED</div>
         } else if (state.newDriverWindow) {
-            return <NewDriverWindow/>
+            return <ManageDriversWindow/>
         } else if (state.newCargo) {
             return <NewCargoWindow/>
         }

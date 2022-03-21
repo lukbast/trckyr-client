@@ -9,14 +9,14 @@ interface IProps {
     submitFunction: any
 }
 
-const DriverForm:FC<IProps> = ({onChange, submitFunction}):JSX.Element =>{
+const DriverForm:FC<IProps> = ({onChange, submitFunction, buttonText}):JSX.Element =>{
     return(
         <div className="driver-form">
             <Input name="name" type="text" labelText="Name" length="long" onChange={onChange} />
             <Input name="phone" type="text" labelText="Phone" length="long" onChange={onChange} />
             <Input name="email" type="text" labelText="email" length="long" onChange={onChange} />
             <div className="button-div">
-                <Button text="Add driver" onClick={submitFunction} />
+                <Button text={buttonText} onClick={submitFunction} />
             </div>
         </div>
     )

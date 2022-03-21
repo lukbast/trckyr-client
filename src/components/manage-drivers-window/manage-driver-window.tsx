@@ -1,11 +1,12 @@
 import { FC, useState } from "react"
 import { IDriverData } from "../../interfaces"
 import DriverForm from "../driver-form/driver-form"
-import "./new-driver-window.scss"
+import Subwindow from "../subwindow/subwindow"
+import "./manage-drivers-window.scss"
 
 
 
-const NewDriverWindow:FC = ():JSX.Element =>{
+const ManageDriversWindow:FC = ():JSX.Element =>{
 
     const defaultState:IDriverData = {
         name: "",
@@ -27,12 +28,14 @@ const NewDriverWindow:FC = ():JSX.Element =>{
 
 
     return(
-        <div className="new-driver-window">
-            <DriverForm onChange={onChange} submitFunction={submit} buttonText="Dew driver" />
-            
+        <div className="manage-drivers-window">
+
+            <Subwindow>
+                <DriverForm onChange={onChange} submitFunction={submit} buttonText="Add driver" />
+            </Subwindow>
         </div>
     )
 }
 
 
-export default NewDriverWindow
+export default ManageDriversWindow
