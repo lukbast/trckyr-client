@@ -1,7 +1,7 @@
 import { FC, useState } from "react"
 import CargoForm from "../cargo-form/cargo-form"
-import { useCargoDataContext } from "../../context/cargo-data-context"
-import { useCargoWindowContext } from "../../context/cargo-window-context"
+import { useCargoDataContext, ActionTypes as DataActions } from "../../context/cargo-data-context"
+import { ActionTypes as WindowActions, useCargoWindowContext } from "../../context/cargo-window-context"
 
 
 const EditCargoForm:FC = ():JSX.Element => {
@@ -19,7 +19,8 @@ const EditCargoForm:FC = ():JSX.Element => {
     }
 
     const submit = () =>{
-        console.log(state)
+        cargoDataContext.dispatch({type: DataActions.EDIT_CARGO, payload: state})
+        cargoWindowContext.dispatch({type: WindowActions.SHOW_SELECTED, payload: state._id})
     }
 
     return(

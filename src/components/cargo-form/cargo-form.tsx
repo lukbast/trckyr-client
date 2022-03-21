@@ -8,7 +8,7 @@ interface IProps {
     onChange: any,
     submitFunction: any,
     buttonText: string,
-    data? : ICargoData
+    data : ICargoData
 }
 
 

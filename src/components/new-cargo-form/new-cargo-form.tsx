@@ -32,7 +32,7 @@ const NewCargoForm:FC = ():JSX.Element =>{
     }
 
     return(
-        <CargoForm buttonText="New Cargo" submitFunction={submit} onChange={onChange} />
+        <CargoForm buttonText="New Cargo" submitFunction={submit} onChange={onChange} data={state} />
 
     )
 }
