@@ -30,7 +30,7 @@ const NewDriverForm:FC = ():JSX.Element =>{
     }
 
 
-    return(<DriverForm onChange={onChange} submitFunction={submit} buttonText="Add driver" />)
+    return(<DriverForm onChange={onChange} submitFunction={submit} buttonText="Add driver" data={state} />)
 
 }
 

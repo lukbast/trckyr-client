@@ -1,22 +1,17 @@
-import { useCargoDataContext } from "../../context/cargo-data-context"
-import { ActionTypes, useCargoWindowContext } from "../../context/cargo-window-context"
+import { ActionTypes as DataActions, useCargoDataContext } from "../../context/cargo-data-context"
+import { ActionTypes as WindowActions, useCargoWindowContext } from "../../context/cargo-window-context"
 import Button from "../button/button"
 import "./cargo-preview.scss"
 
 
-
 const CargoPreview = ():JSX.Element => {
 
-    const cargoWindowContext = useCargoWindowContext()
-    const cargoDataContest = useCargoDataContext()
-
-    const onClick = () =>{
-        alert("IM WORKING !!11!!1!!!!1111")
-    }
+    const windowContext = useCargoWindowContext()
+    const dataContext = useCargoDataContext()
 
     const renderCargoDetails = ():JSX.Element    =>{
-        const i = cargoWindowContext.state.selected
-        const data = cargoDataContest.state.data[i]
+        const i = windowContext.state.selected
+        const data = dataContext.state.data[i]
         return(
             <div className="cargo-details">
                 {[data._id, data.name, data.weight, data.quantity, data.quantityUnit, data.weight, data.weightUnit, data.info]}
@@ -24,15 +19,24 @@ const CargoPreview = ():JSX.Element => {
         )
     }
 
+    const deleteItem = () =>{
+        const selected = windowContext.state.selected
+        windowContext.dispatch({type: WindowActions.SHOW_SELECTED, payload: 0})
+        dataContext.dispatch({type: DataActions.DELETE_CARGO, payload: dataContext.state.data[selected]})
+    }
+
     return(
         <div className="cargo-preview">
-            <Button text="Edit cargo" onClick={() => {cargoWindowContext.dispatch(
-                {type: ActionTypes.SHOW_EDIT, 
-                 payload: cargoWindowContext.state.selected})}}
+            <Button text="Edit cargo" onClick={() => {windowContext.dispatch(
+                {type: WindowActions.SHOW_EDIT, 
+                 payload: windowContext.state.selected})}}
             />
-            <Button text="New cargo" onClick={() => {cargoWindowContext.dispatch(
-                {type: ActionTypes.SHOW_NEW, 
-                 payload: cargoWindowContext.state.selected})}}/>
+            <Button text="New cargo" onClick={() => {windowContext.dispatch(
+                {type: WindowActions.SHOW_NEW, 
+                 payload: windowContext.state.selected})}}
+            />
+            <Button text="Delete cargo" onClick={deleteItem}
+            />
             {renderCargoDetails()}
         </div>
     )

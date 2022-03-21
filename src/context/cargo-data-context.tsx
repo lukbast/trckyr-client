@@ -1,5 +1,6 @@
 import { createContext, useReducer, useContext, ReactNode } from "react";
 import { ICargoData } from "../interfaces";
+import { removeData } from "../utils";
 
 const defaultState = {
     data : [
@@ -62,24 +63,12 @@ function cargoReducer (state: State, action: IAction):State {
                 data: newData
             })
         case ActionTypes.DELETE_CARGO:
-            const cleanedData = []
-            let i = 0
-            for (i; i < action.payload._id;  i++){
-                cleanedData.push(state.data[i])
-            }
-            i ++;
-            for (i; i < state.data.length;  i++){
-                const shiftedObject = state.data[i]
-                shiftedObject._id = i - 1
-                cleanedData.push(shiftedObject)
-            }
-            return {...state,
-            data: cleanedData}
+            const cleanedData = removeData(action.payload._id, state.data)
+            return({data :cleanedData})
         case ActionTypes.EDIT_CARGO:
             const tempData = state.data
             tempData[action.payload._id] = action.payload
             return ({data: tempData})
-
      }
 }
 
