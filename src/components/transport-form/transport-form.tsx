@@ -51,7 +51,7 @@ const TransportForm:FC<IProps> = ({data, onChange, submitFunction, handleSelectC
             <div className="input-label-group">
                 <label htmlFor={`${nameOfField}-select`}>{`Choose a ${nameOfField}`}:</label>
 
-                <select onChange={handleSelectChange} multiple={true} name={nameOfField} id={`${nameOfField}-select`}>
+                <select onChange={nameOfField === "drivers"? handleSelectChange: onChange } multiple={nameOfField === "drivers"? true: false } name={nameOfField} id={`${nameOfField}-select`}>
                     {options}
                 </select>
             </div>

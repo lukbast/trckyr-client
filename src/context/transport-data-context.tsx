@@ -1,5 +1,5 @@
 import { createContext, useReducer, useContext, ReactNode } from "react";
-import {ITransportData} from "../interfaces"
+import {ITransportData, ITransportFormState} from "../interfaces"
 
 const defaultState:ITransportData[] = [{
     _id: 0,
@@ -35,7 +35,7 @@ export enum ActionTypes {
 
 interface IAction{
     type: ActionTypes,
-    payload: ITransportData
+    payload: ITransportFormState
 }
 
 interface ITransportDataContext {
@@ -53,9 +53,13 @@ const TransportContext = createContext<ITransportDataContext>({state: defaultSta
 function transportDataReducer (state: State, action: IAction):State {
     switch (action.type) {
         case ActionTypes.ADD_TRANSPORT:
+            const newId = state.length
             const tempState = [...state]
-            tempState.push(action.payload)
-            return []
+            const tempObj:ITransportData = {...action.payload, 
+                total:123, remaining:123, 
+                eta:"123 hr 45 min", _id: newId, state: "In progress", coordinates: [123, 456]}
+            tempState.push(tempObj)
+            return tempState
     }
 }
 

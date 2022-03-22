@@ -1,7 +1,11 @@
 import { FC, useState } from "react"
+import { ActionTypes, useTransportDataContext } from "../../context/transport-data-context"
 import TransportForm from "../transport-form/transport-form"
 
 const NewTransportForm:FC = ():JSX.Element =>{
+
+    const transportDataContext = useTransportDataContext()
+
     const defaultState = {
         name: "",
         from: "",
@@ -26,13 +30,18 @@ const NewTransportForm:FC = ():JSX.Element =>{
     }
 
     function onChange(e: React.ChangeEvent<HTMLInputElement>){
+        const name = e.target.name
+        let value: string | number = e.target.value
+        if (name === "cargo"){ 
+            value = parseInt(value)
+        }
         setState({...state,
-            [e.target.name]: e.target.value 
+            [name]: value 
         })
     }
 
     const submit = ()=>{
-        console.log(state)
+        transportDataContext.dispatch({type: ActionTypes.ADD_TRANSPORT, payload:state})
     }
 
     return (<TransportForm data={state} onChange={onChange} submitFunction={submit} handleSelectChange={handleSelectChange}/>)
