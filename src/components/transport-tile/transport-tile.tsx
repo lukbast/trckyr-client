@@ -1,19 +1,9 @@
 import { FC } from "react"
+import { ITransportData } from "../../interfaces"
 import "./transport-tile.scss"
 
 interface IProps{
-    data: {
-        name: string,
-        from:string,
-        to:string,
-        drivers: string[],
-        cargo: string,
-        quantity: string,
-        total: number,
-        remaining: number,
-        eta: string,
-        state: string
-    }
+    data: ITransportData
     isSelelected: boolean,
     changer: any
     index: number

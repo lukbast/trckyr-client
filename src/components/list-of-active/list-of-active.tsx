@@ -1,18 +1,17 @@
 import { FC } from "react"
 import { useSelectedTransport } from "../../context/selected-transport-context"
+import { useTransportDataContext } from "../../context/transport-data-context"
 import { useWindowState } from "../../context/window-context"
-import { exampleState } from "../main-window/tempState"
 import TransportTile from "../transport-tile/transport-tile"
 import "./list-of-active.scss"
 
-interface IProps {
-    data: typeof exampleState
-}
 
-const ListOfActive:FC<IProps> = ({data}):JSX.Element =>{
+
+const ListOfActive:FC = ():JSX.Element =>{
 
     const windowState = useWindowState()
     const selectedTransport = useSelectedTransport()
+    const transportDataContext = useTransportDataContext()
 
     const changer = (index:number) =>{
         selectedTransport.dispatch(index)
@@ -20,6 +19,7 @@ const ListOfActive:FC<IProps> = ({data}):JSX.Element =>{
     }
 
     const renderList = () =>{
+        const data = transportDataContext.state
         const temp = []
         for (let i = 0; i< data.length; i++){
             if(i === selectedTransport.state.index){
