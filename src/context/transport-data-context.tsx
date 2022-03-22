@@ -1,5 +1,7 @@
 import { createContext, useReducer, useContext, ReactNode } from "react";
-import {ITransportData, ITransportFormState} from "../interfaces"
+import {ITransportData} from "../interfaces"
+
+import {removeData} from "../utils"
 
 const defaultState:ITransportData[] = [{
     _id: 0,
@@ -30,12 +32,14 @@ const defaultState:ITransportData[] = [{
 export type State  = typeof defaultState
 
 export enum ActionTypes {
-    "ADD_TRANSPORT"
+    "ADD_TRANSPORT",
+    "EDIT_TRANSPORT",
+    "DELETE_TRANSPORT"
 }
 
 interface IAction{
     type: ActionTypes,
-    payload: ITransportFormState
+    payload: ITransportData
 }
 
 interface ITransportDataContext {
@@ -53,13 +57,16 @@ const TransportContext = createContext<ITransportDataContext>({state: defaultSta
 function transportDataReducer (state: State, action: IAction):State {
     switch (action.type) {
         case ActionTypes.ADD_TRANSPORT:
-            const newId = state.length
             const tempState = [...state]
-            const tempObj:ITransportData = {...action.payload, 
-                total:123, remaining:123, 
-                eta:"123 hr 45 min", _id: newId, state: "In progress", coordinates: [123, 456]}
-            tempState.push(tempObj)
+            tempState.push(action.payload)
             return tempState
+        case ActionTypes.EDIT_TRANSPORT:
+            const temp = [...state]
+            temp[action.payload._id] = action.payload
+            console.log(temp)
+            return temp
+        case ActionTypes.DELETE_TRANSPORT:
+            return removeData(action.payload._id, state)
     }
 }
 

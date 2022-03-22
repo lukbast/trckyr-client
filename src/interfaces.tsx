@@ -2,7 +2,7 @@ export interface ITransportData {
     _id: number,
     name: string,
     from: string,
-    to: String,
+    to: string,
     drivers: number[],
     cargo: number,
     total: number,

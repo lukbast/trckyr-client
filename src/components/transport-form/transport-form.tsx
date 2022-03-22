@@ -10,10 +10,11 @@ interface IProps{
     data: ITransportFormState,
     onChange: any,
     handleSelectChange: any,
-    submitFunction: any
+    submitFunction: any,
+    buttonText: string
 }
 
-const TransportForm:FC<IProps> = ({data, onChange, submitFunction, handleSelectChange}) =>{
+const TransportForm:FC<IProps> = ({data, onChange, submitFunction, handleSelectChange, buttonText}) =>{
 
 
     const driversDataContex = useDriverDataContext()
@@ -66,7 +67,7 @@ const TransportForm:FC<IProps> = ({data, onChange, submitFunction, handleSelectC
             {renderSelectInput("drivers",onChange)}
             {renderSelectInput("cargo", onChange)}
 
-            <Button text="Add transport" onClick={submitFunction}/>
+            <Button text={buttonText} onClick={submitFunction}/>
         </div>
     )
 }

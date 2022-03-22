@@ -2,12 +2,13 @@ import { createContext, useReducer, useContext, ReactNode } from "react";
 
 const defaultState = {
     transportWindow: true,
+    editTransportWindow: false,
     newTransportWindow : false,
     newDriverWindow: false,
     newCargo: false
 }
 
-export type Action = "openTransport" | "openNewTransport" | "openNewDriver" | "openNewCargo"
+export type Action = "openTransport" | "openNewTransport" | "openNewDriver" | "openNewCargo" | "openEditTransport"
 export type State  = typeof defaultState
 
 export interface WindowProviderProps {
@@ -26,6 +27,7 @@ function windowReducer (state: State, action: Action) {
         case "openTransport":
             return {
                 transportWindow: true,
+                editTransportWindow: false,
                 newTransportWindow : false,
                 newDriverWindow: false,
                 newCargo: false
@@ -33,6 +35,7 @@ function windowReducer (state: State, action: Action) {
         case "openNewTransport":
             return{
                 transportWindow: false,
+                editTransportWindow: false,
                 newTransportWindow : true,
                 newDriverWindow: false,
                 newCargo: false
@@ -40,6 +43,7 @@ function windowReducer (state: State, action: Action) {
         case "openNewDriver":
             return {
                 transportWindow: false,
+                editTransportWindow: false,
                 newTransportWindow : false,
                 newDriverWindow: true,
                 newCargo: false
@@ -47,9 +51,18 @@ function windowReducer (state: State, action: Action) {
         case "openNewCargo":
             return{
                 transportWindow: false,
+                editTransportWindow: false,
                 newTransportWindow : false,
                 newDriverWindow: false,
                 newCargo: true
+            }
+        case "openEditTransport":
+            return{
+                transportWindow: false,
+                editTransportWindow: true,
+                newTransportWindow : false,
+                newDriverWindow: false,
+                newCargo: false
             }
     }
 }

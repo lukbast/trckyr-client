@@ -2,26 +2,21 @@ import { FC, useState } from "react"
 import { useSelectedTransport } from "../../context/selected-transport-context"
 import { ActionTypes, useTransportDataContext } from "../../context/transport-data-context"
 import { useWindowState } from "../../context/window-context"
+import { ITransportFormState } from "../../interfaces"
 import TransportForm from "../transport-form/transport-form"
 
-const NewTransportForm:FC = ():JSX.Element =>{
+const EditTransportForm:FC = ():JSX.Element =>{
 
     const transportDataContext = useTransportDataContext()
     const selectedTransportContext = useSelectedTransport()
-    const windowContex = useWindowState()
+    const windowContext = useWindowState()
 
-    const defaultState = {
-        _id: transportDataContext.state.length, 
-        name: "",
-        from: "",
-        to: "",
-        drivers:[0],
-        cargo: 0,
-        total:123, 
-        remaining:123, 
-        eta:"123 hr 45 min", 
-        state: "In progress", 
-        coordinates: [123, 456]
+    let toEdit = transportDataContext.state[selectedTransportContext.state.index]
+
+    const defaultState:ITransportFormState = {name:toEdit.name, 
+        to:toEdit.to, from:toEdit.from, 
+        drivers:toEdit.drivers, 
+        cargo:toEdit.cargo
     } 
     const [state, setState] =  useState(defaultState)
 
@@ -51,12 +46,12 @@ const NewTransportForm:FC = ():JSX.Element =>{
     }
 
     const submit = ()=>{
-        transportDataContext.dispatch({type: ActionTypes.ADD_TRANSPORT, payload:state})
-        selectedTransportContext.dispatch(transportDataContext.state.length)
-        windowContex.dispatch("openTransport")
+        toEdit = {...toEdit, ...state}
+        transportDataContext.dispatch({type: ActionTypes.EDIT_TRANSPORT, payload:toEdit})
+        windowContext.dispatch("openTransport")
     }
 
-    return (<TransportForm buttonText="Add transport" data={state} onChange={onChange} submitFunction={submit} handleSelectChange={handleSelectChange}/>)
+    return (<TransportForm buttonText="Edit transport" data={state} onChange={onChange} submitFunction={submit} handleSelectChange={handleSelectChange}/>)
 }
 
-export default NewTransportForm
+export default EditTransportForm
