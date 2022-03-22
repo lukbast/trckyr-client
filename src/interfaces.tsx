@@ -1,10 +1,10 @@
 export interface ITransportData {
+    _id: number,
     name: string,
     from: string,
     to: String,
     drivers: number[],
     cargo: number,
-    quantity: string,
     total: number,
     remaining: number,
     eta: string,
@@ -29,3 +29,11 @@ export interface IDriverData{
     phone: string,
     email: string
 }
+
+export interface ITransportFormState{
+    name: string
+    from: string,
+    to: string,
+    drivers: number[]
+    cargo: number
+} 

@@ -8,6 +8,7 @@ import { DriversWindowProvider } from "../../context/drivers-window-context"
 import { CargoWindowProvider } from "../../context/cargo-window-context"
 import { useTransportDataContext } from "../../context/transport-data-context"
 import { useSelectedTransport } from "../../context/selected-transport-context"
+import NewTransportForm from "../new-transport-form/new-transport-form"
 
 
 
@@ -21,7 +22,7 @@ const MainTab:FC = ():JSX.Element =>{
     const display = ():JSX.Element =>{
         const data = transportDataContext.state[selectedTransport.state.index]
         if (state.newTransportWindow) {
-            return <div>NEW TRANSPORT WINDOW OPENED</div>
+            return <NewTransportForm/>
         } else if (state.newDriverWindow) {
             return <DriversWindowProvider><ManageDriversWindow/></DriversWindowProvider>
         } else if (state.newCargo) {
