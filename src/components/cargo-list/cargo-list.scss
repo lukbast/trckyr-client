@@ -1,5 +1,5 @@
 .cargo-list{
-    width: 30%;
+    width: 50%;
     height: 100%;
     position: absolute;
     left: 0px;
@@ -7,40 +7,38 @@
 }
 
 .table{
-    width: 100%;
-    border: 1px solid;
+    margin:40px;
+    width: 80%;
+    border: none;
     border-collapse: collapse;
+    border-radius: 15px;
+    background-color: #ffffff;
 
     thead{
-        th, td {
-            height: 40px;
-          }
-
         th:hover{
             cursor: pointer;
-            background-color: aliceblue;
         }
     }
 
     tbody{
-
-        th, td {
-            height: 40px;
-        }
-
         tr {
             cursor: pointer;
         }
         .selected{
-            background-color: brown;
+            background-color: #fce3ce;
         }
 
         tr:hover{
-            background-color: rgb(170, 238, 250);
+            background-color: #eaf5ff;
         }
 
-    }
-
-    
+    }    
 }
+
+th, td {
+    padding: 0px 30px;
+    height: 40px;
+    text-align: left;
+
+  }
 

@@ -1,5 +1,4 @@
 import { FC} from "react"
-import "./cargo-form.scss"
 import { ICargoData } from "../../interfaces"
 import Button from "../button/button"
 import Input from "../input/input"
@@ -15,7 +14,7 @@ interface IProps {
 const CargoForm:FC<IProps> = ({onChange, submitFunction, buttonText, data}) => {
 
     return(
-        <div className="cargo-form">
+        <div className="driver-form">
             <Input type="text" name="name" value={data? data.name: ""} onChange={onChange} labelText="Name" length="long"/>
             <div className="input-group">
                 <Input type="number" name="weight" onChange={onChange} labelText="Weigth" length="short" value={data? data.weight: ""}/>

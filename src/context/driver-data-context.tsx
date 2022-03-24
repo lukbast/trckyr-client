@@ -8,17 +8,27 @@ const defaultState:IDriverData[] = [
     firstName: "Grzegorz",
     lastName: "Brzęszyczykiewicz",
     phone: "123456789",
-    email: "gbrzeszcz@asdfmail.com"},
+    email: "gbrzeszcz@asdfmail.com",
+    addedBy: "TEST ACCOUNT",
+    added: "23/05/2021",
+    lastModified: "30/02/2022" 
+    },
     {_id: 1,
     firstName: "John",
     lastName: "Doe",
     phone: "987654321",
-    email: "john.doe@qwertymail.com"},
+    email: "john.doe@qwertymail.com",
+    addedBy: "TEST ACCOUNT",
+    added: "23/05/2021",
+    lastModified: "30/02/2022" },
     {_id: 2,
     firstName: "Random",
     lastName: "Dude",
     phone: "112233445566",
-    email: "dude@zxcvbmail.com"}
+    email: "dude@zxcvbmail.com",
+    addedBy: "TEST ACCOUNT",
+    added: "23/05/2021",
+    lastModified: "30/02/2022" }
 ]
 
 type State = typeof defaultState

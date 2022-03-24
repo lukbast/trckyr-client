@@ -19,7 +19,10 @@ export interface ICargoData{
     weightUnit: string,
     quantity: number,
     quantityUnit: string,
-    info: string
+    info: string,
+    addedBy: string,
+    added: string,
+    lastModified: string
 }
 
 export interface IDriverData{
@@ -27,7 +30,10 @@ export interface IDriverData{
     firstName: string,
     lastName: string,
     phone: string,
-    email: string
+    email: string,
+    addedBy: string,
+    added: string,
+    lastModified: string
 }
 
 export interface ITransportFormState{

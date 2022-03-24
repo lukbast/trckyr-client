@@ -15,12 +15,15 @@ const DriverPreview:FC = ():JSX.Element =>{
         const data = dataContext.state[i]
 
         return (
-            <div className="drivers-details">
-                {[data._id, data.email, data.firstName, data.lastName, data.phone]}
+            <div className="section details">
+                <div className="row">ID: {data._id} </div>
+                <div className="row">First name: {data.firstName} </div>
+                <div className="row">Last name: {data.lastName} </div>
+                <div className="row">Added by: {data.addedBy} </div>
+                <div className="row">Added: {data.added} </div>
+                <div className="row">Last modified: {data.lastModified} </div>
             </div>
-        )
-
-    }
+    )}
 
     const deleteItem = () =>{
         const selected = windowContext.state.selected
@@ -30,14 +33,14 @@ const DriverPreview:FC = ():JSX.Element =>{
 
     return (
         <div className="driver-preview">
-            <Button onClick={() => {windowContext.dispatch({type: WindowActions.SHOW_NEW, payload: windowContext.state.selected})}} text="New driver"/>
-            <Button onClick={() => {windowContext.dispatch({type: WindowActions.SHOW_EDIT, payload: windowContext.state.selected})}} text="Edit driver"/>
-            <Button onClick={deleteItem} text="delete driver"/>
+            <div className="section buttons-section">
+                <Button onClick={() => {windowContext.dispatch({type: WindowActions.SHOW_NEW, payload: windowContext.state.selected})}} text="New driver"/>
+                <Button onClick={() => {windowContext.dispatch({type: WindowActions.SHOW_EDIT, payload: windowContext.state.selected})}} text="Edit driver"/>
+                <Button onClick={deleteItem} text="delete driver"/>
+            </div>
             {renderDriverDetails()}
         </div>
     )
 }
-
-
 
 export default DriverPreview

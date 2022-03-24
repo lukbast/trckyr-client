@@ -11,7 +11,10 @@ const NewDriverForm:FC = ():JSX.Element =>{
         firstName: "",
         lastName: "",
         phone: "",
-        email: ""
+        email: "",
+        addedBy: "TEST ACCOUNT",
+        added: "23/05/2021",
+        lastModified: "30/02/2022" 
     }
 
     const [state, setState] = useState<IDriverData>(defaultState)

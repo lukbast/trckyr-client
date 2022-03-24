@@ -1,9 +1,11 @@
+import "./transport-form.scss"
 import { FC} from "react"
 import { useCargoDataContext } from "../../context/cargo-data-context"
 import { useDriverDataContext } from "../../context/driver-data-context"
 import { ITransportFormState} from "../../interfaces"
 import Button from "../button/button"
 import Input from "../input/input"
+import Subwindow from "../subwindow/subwindow"
 
 
 interface IProps{
@@ -60,15 +62,21 @@ const TransportForm:FC<IProps> = ({data, onChange, submitFunction, handleSelectC
     }
 
     return(
-        <div className="driver-form">
-            <Input value={data.name} labelText="Name" type="text" length="long" name="name" onChange={onChange}/>
-            <Input value={data.from} labelText="From" type="text" length="long" name="from" onChange={onChange}/>
-            <Input value={data.to} labelText="To" type="text" length="long" name="to" onChange={onChange}/>
-            {renderSelectInput("drivers",onChange)}
-            {renderSelectInput("cargo", onChange)}
+        <div className="transport-form-container">
+            <div className="driver-form transport-form">
+                <Input value={data.name} labelText="Name" type="text" length="long" name="name" onChange={onChange}/>
+                <Input value={data.from} labelText="From" type="text" length="long" name="from" onChange={onChange}/>
+                <Input value={data.to} labelText="To" type="text" length="long" name="to" onChange={onChange}/>
 
-            <Button text={buttonText} onClick={submitFunction}/>
+                <Button text={buttonText} onClick={submitFunction}/>
+                
+            </div>
+            <div className="selects">
+                    {renderSelectInput("drivers",onChange)}
+                    {renderSelectInput("cargo", onChange)}
+            </div>
         </div>
+        
     )
 }
 

@@ -1,0 +1,24 @@
+.transport-form{
+    width: 400px !important; 
+    background-color: #ffffff;
+    border-radius: 15px;
+
+    padding: 40px;
+    margin-left: 40px;
+}
+
+.transport-form-container{
+    display: flex;
+    flex-direction: row;
+
+    .selects{
+        width: 350px;
+
+        margin-top: 40px;
+        margin-left: 50px;
+        padding: 40px;
+
+        background-color: #ffffff;
+        border-radius: 15px;
+    }
+}

@@ -14,7 +14,10 @@ const NewCargoForm:FC = ():JSX.Element =>{
         quantityUnit: "",
         weight: 0,
         weightUnit: "",
-        info: ""
+        info: "",
+        addedBy: "TEST ACCOUNT",
+        added: "23/05/2021",
+        lastModified: "30/02/2022"
     } 
 
     const [state, setState] = useState<ICargoData>(defaultState)
