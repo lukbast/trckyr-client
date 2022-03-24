@@ -1,23 +1,28 @@
 import { createContext, useReducer, useContext, ReactNode } from "react";
 
+
 const defaultState = {
     transportWindow: true,
     editTransportWindow: false,
     newTransportWindow : false,
     newDriverWindow: false,
-    newCargo: false
+    newCargo: false,
+    selectedButton:  ""
 }
-
-export type Action = "openTransport" | "openNewTransport" | "openNewDriver" | "openNewCargo" | "openEditTransport"
+export const enum selectedButtons{ "cargo","transport", "drivers", "none"}
+export type Action = "openTransport" | "openNewTransport" | "openManageDrivers" | "openManageCargos" | "openEditTransport"
 export type State  = typeof defaultState
 
 export interface WindowProviderProps {
     children: ReactNode
 }
+
+
 export interface ICreateContext {
     state : typeof defaultState,
     dispatch: React.Dispatch<Action>
 }
+
 
 
 const WindowContext = createContext<ICreateContext>({state: defaultState, dispatch: () => {}})
@@ -30,7 +35,8 @@ function windowReducer (state: State, action: Action) {
                 editTransportWindow: false,
                 newTransportWindow : false,
                 newDriverWindow: false,
-                newCargo: false
+                newCargo: false,
+                selectedButton: "none"
             }
         case "openNewTransport":
             return{
@@ -38,23 +44,26 @@ function windowReducer (state: State, action: Action) {
                 editTransportWindow: false,
                 newTransportWindow : true,
                 newDriverWindow: false,
-                newCargo: false
+                newCargo: false,
+                selectedButton: "transport"
             }
-        case "openNewDriver":
+        case "openManageDrivers":
             return {
                 transportWindow: false,
                 editTransportWindow: false,
                 newTransportWindow : false,
                 newDriverWindow: true,
-                newCargo: false
+                newCargo: false,
+                selectedButton: "driver"
             }
-        case "openNewCargo":
+        case "openManageCargos":
             return{
                 transportWindow: false,
                 editTransportWindow: false,
                 newTransportWindow : false,
                 newDriverWindow: false,
-                newCargo: true
+                newCargo: true,
+                selectedButton: "cargo"
             }
         case "openEditTransport":
             return{
@@ -62,7 +71,8 @@ function windowReducer (state: State, action: Action) {
                 editTransportWindow: true,
                 newTransportWindow : false,
                 newDriverWindow: false,
-                newCargo: false
+                newCargo: false,
+                selectedButton: "none"
             }
     }
 }

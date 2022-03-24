@@ -1,8 +1,28 @@
 .menu-bar-button{
-    width: 200px;
-    height: 10vh;
+    width: 180px;
+    height: 7vh;
 
     border: none;
+    border-radius: 30px 30px;
+    margin: 0px 20px;
 
     cursor: pointer;
+
+    .icon{
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        margin: 0px 10px;
+    }
+}
+
+.menu-bar-button:hover{
+    background-color: #fce3ce;
+}
+
+
+
+.selected-menu-bar-button {
+    border: 3px solid #d48031;
+    background-color: #fce3ce;
 }
