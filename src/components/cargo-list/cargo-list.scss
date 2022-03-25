@@ -6,39 +6,53 @@
     top: 0px;
 }
 
-.table{
-    margin:40px;
-    width: 80%;
-    border: none;
-    border-collapse: collapse;
-    border-radius: 15px;
-    background-color: #ffffff;
 
-    thead{
-        th:hover{
+
+.table{
+    width: fit-content;
+    max-height: 580px;
+    margin:40px;
+
+    border-radius: 15px;
+    overflow-y: scroll;
+
+    .row{
+        display: grid;
+        padding: 20px;
+        margin: 0px;
+
+        .field{
             cursor: pointer;
         }
     }
 
-    tbody{
-        tr {
-            cursor: pointer;
-        }
-        .selected{
-            background-color: #fce3ce;
-        }
+    .cols-2{
+        grid-template-columns: [first] 50px [line2] 250px [end];
+        grid-template-rows: [row1-start] 100% [last-line];
+    }
 
-        tr:hover{
-            background-color: #eaf5ff;
-        }
+    .cols-3{
+        grid-template-columns: [first] 50px [line2] 200px [line3] 200px [end];
+        grid-template-rows: [row1-start] 100% [last-line];
+    }
 
-    }    
+    .row:hover{
+        background-color: #eaf5ff;
+    }
+
+    .head{
+        font-weight: bold;
+    }
+
+    .head:hover{
+        background-color: #ffffff;
+    }
+
+
+    background-color: #ffffff;
+
 }
 
-th, td {
-    padding: 0px 30px;
-    height: 40px;
-    text-align: left;
-
-  }
-
+.selected{
+    background-color: #fce3ce;
+}

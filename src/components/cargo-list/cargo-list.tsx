@@ -43,35 +43,31 @@ const CargoList:FC =  ():JSX.Element =>{
 
   const renderItem =  (data:ICargoData, key:number):JSX.Element =>{
     return(
-      <tr className={cargoWindowContext.state.selected === data._id? "selected": ""} 
+      <div className={cargoWindowContext.state.selected === data._id? "row cols-2 selected": "row cols-2"} 
       onClick={() =>{ onItemCLick(data._id)}} key={key}>
-        <td>{data._id}</td>
-        <td>{data.name}</td>
-      </tr>
+        <div className="field">{data._id}</div>
+        <div className="field">{data.name}</div>
+      </div>
     )
   }
 
 
-  const renderSortedItems = ():JSX.Element => {
+  const renderSortedItems = ():JSX.Element[] => {
     const sortedData = sortItems()
-    return(  
-    <tbody>
-      {sortedData.map( (data) => {return renderItem(data, data._id)})}
-    </tbody>
-    )
+    const renderedList:JSX.Element[] = sortedData.map( (data) => {return renderItem(data, data._id)})
+    console.log(renderItem)
+    return( renderedList)
   }
 
   const renderList = ():JSX.Element => {
     return(
-      <table className="table">
-        <thead>
-          <tr>
-            <th onClick={() => {setOrderingState({columnName: "id", descending: !orderingState.descending})}}>ID</th>
-            <th onClick={() => {setOrderingState({columnName: "name", descending: !orderingState.descending})}}>Name</th>
-          </tr>
-        </thead>
+      <div className="table hide-srollbars">
+          <div className="row cols-2 head">
+            <div className="field" onClick={() => {setOrderingState({columnName: "id", descending: !orderingState.descending})}}>ID </div> 
+            <div className="field"  onClick={() => {setOrderingState({columnName: "name", descending: !orderingState.descending})}}>Name</div> 
+          </div>
         {renderSortedItems()}
-      </table>
+      </div>
     )
   }
 

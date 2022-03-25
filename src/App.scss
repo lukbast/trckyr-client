@@ -10,3 +10,11 @@
     width: 100vw;
     height: 100vh;
 }
+
+.hide-srollbars{
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+.hide-srollbars::-webkit-scrollbar{
+    display: none;
+}

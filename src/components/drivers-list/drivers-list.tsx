@@ -43,36 +43,30 @@ const DriversList:FC = ():JSX.Element =>{
 
     const renderItem =  (data:IDriverData, key:number):JSX.Element =>{
         return(
-          <tr className={driversWindowContext.state.selected === data._id? "selected": ""} 
+          <div className={driversWindowContext.state.selected === data._id? "row cols-3 selected": "row cols-3"} 
           onClick={() =>{ onItemCLick(data._id)}} key={key}>
-            <td>{data._id}</td>
-            <td>{data.lastName}</td>
-            <td>{data.firstName}</td>
-          </tr>
+            <div className="field">{data._id}</div>
+            <div className="field">{data.lastName}</div>
+            <div className="field">{data.firstName}</div>
+          </div>
         )
       }
     
-      const renderItems = ():JSX.Element => {
+      const renderItems = ():JSX.Element[] => {
         const sortedData = sortItems()
-        return(  
-        <tbody>
-          {sortedData.map( (data) => {return renderItem(data, data._id)})}
-        </tbody>
-        )
+        return(sortedData.map( (data) => {return renderItem(data, data._id)}))
       }
 
       const renderList = ():JSX.Element => {
         return(
-          <table className="table">
-            <thead>
-              <tr>
-                <th onClick={() => {setOrderingState({columnName:"id", descending: !orderingState.descending})}}>ID</th>
-                <th onClick={() => {setOrderingState({columnName:"lastName", descending: !orderingState.descending})}}>Last name</th>
-                <th onClick={() => {setOrderingState({columnName:"firstName", descending: !orderingState.descending})}}>First name</th>
-              </tr>
-            </thead>
+          <div className="table hide-srollbars">
+            <div className="row head cols-3">
+              <div onClick={() => {setOrderingState({columnName:"id", descending: !orderingState.descending})}}>ID</div>
+              <div onClick={() => {setOrderingState({columnName:"lastName", descending: !orderingState.descending})}}>Last name</div>
+              <div onClick={() => {setOrderingState({columnName:"firstName", descending: !orderingState.descending})}}>First name</div>
+            </div>
             {renderItems()}
-          </table>
+          </div>
         )
       }
 
