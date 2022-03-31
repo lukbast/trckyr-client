@@ -14,14 +14,14 @@ const CargoPreview = ():JSX.Element => {
         const data = dataContext.state.data[i]
         return(
             <div className="section details">
-                <div className="row">ID: {data._id} </div>
-                <div className="row">Name: {data.name} </div>
-                <div className="row">Quantity: {data.quantity} {data.quantityUnit}</div>
-                <div className="row">Weight: {data.weight} {data.weightUnit} </div>
-                {data.info? <div className="row">Additional info: {data.info} </div> : ""}
-                <div className="row">Added by: {data.addedBy} </div>
-                <div className="row">Added: {data.added} </div>
-                <div className="row">Last modified: {data.lastModified} </div>
+                <div className="row"><b>ID:</b> {data._id} </div>
+                <div className="row"><b>Name:</b> {data.name} </div>
+                <div className="row"><b>Quantity:</b> {data.quantity} {data.quantityUnit}</div>
+                <div className="row"><b>Weight:</b> {data.weight} {data.weightUnit} </div>
+                {data.info? <div className="row"><b>Additional info:</b> {data.info} </div> : ""}
+                <div className="row"><b>Added by</b> {data.addedBy} </div>
+                <div className="row"><b>Added</b> {data.added} </div>
+                <div className="row"><b>Last modified:</b> {data.lastModified} </div>
             </div>
         )
     }
