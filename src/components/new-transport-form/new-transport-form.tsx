@@ -1,7 +1,8 @@
 import { FC, useState } from "react"
 import { useSelectedTransport } from "../../context/selected-transport-context"
-import { ActionTypes, useTransportDataContext } from "../../context/transport-data-context"
+import { ActionTypes, useTransportDataContext, statusesPlaceholder } from "../../context/transport-data-context"
 import { useWindowState } from "../../context/window-context"
+import { ITransportData } from "../../interfaces"
 import TransportForm from "../transport-form/transport-form"
 
 const NewTransportForm:FC = ():JSX.Element =>{
@@ -10,7 +11,7 @@ const NewTransportForm:FC = ():JSX.Element =>{
     const selectedTransportContext = useSelectedTransport()
     const windowContex = useWindowState()
 
-    const defaultState = {
+    const defaultState:ITransportData = {
         _id: transportDataContext.state.length, 
         name: "",
         from: "",
@@ -18,10 +19,11 @@ const NewTransportForm:FC = ():JSX.Element =>{
         drivers:[0],
         cargo: 0,
         total:123, 
-        remaining:123, 
-        eta:"123 hr 45 min", 
         state: "In progress", 
-        coordinates: [123, 456]
+        addedBy: "TEST ACCOUNT",
+        added: "23/05/2021",
+        lastModified: "30/02/2022",
+        statuses: statusesPlaceholder
     } 
     const [state, setState] =  useState(defaultState)
 

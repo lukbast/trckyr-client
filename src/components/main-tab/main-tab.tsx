@@ -32,7 +32,7 @@ const MainTab:FC = ():JSX.Element =>{
     }
 
     return(
-        <div className="main-tab">
+        <div className="main-tab hide-srollbars">
             {display()}
         </div>
     )
