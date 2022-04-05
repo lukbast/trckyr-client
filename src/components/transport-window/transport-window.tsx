@@ -63,7 +63,7 @@ const TransportWindow:FC<IProps> = ({data}):JSX.Element =>{
         for (let i = 0; i< drivers.length; i++){
             rows.push(<div className="row">
                         <div className="field">{drivers[i]._id}</div>
-                        <div className="field">{drivers[i].lastName} {drivers[i].firstName}</div>
+                        <div className="field">{drivers[i].lastname} {drivers[i].firstname}</div>
                         <div className="field">{drivers[i].phone}</div>
                         <div className="field">{drivers[i].email}</div>
                     </div>)

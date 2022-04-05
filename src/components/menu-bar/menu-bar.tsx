@@ -4,6 +4,7 @@ import { useWindowState } from "../../context/window-context"
 import MenuBarButton from "../menu-bar-button/menu-bar-button"
 import "./menu-bar.scss"
 
+
 import driverIcon from "../../assets/driver.svg"
 import cargoIcon from "../../assets/cargo.svg"
 import transportIcon from "../../assets/transport.svg"
@@ -17,11 +18,12 @@ const MenuBar:FC<IProps> = ({user, logOut}):JSX.Element =>{
 
 
     const {state, dispatch} = useWindowState()
-    
+
     const getSelected = (name: string) =>{
         const sel = state.selectedButton
         return sel ===  name ? true: false
     }
+
 
 
     return(

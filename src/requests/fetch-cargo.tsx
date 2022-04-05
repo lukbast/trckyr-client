@@ -1,10 +1,13 @@
 import { useState } from "react";
-import { FetchState, ICargoData, ICargoResponse } from "../interfaces";
+import { FetchState, ICargoResponse } from "../interfaces";
 import axios from  "axios"
+import { useCargoDataContext, ActionTypes as CargoActions } from "../context/cargo-data-context"
+
 
 export function useFetchCargos(){
     const [fetchState, setFetchState] = useState(FetchState.DEFAULT)
     const [cargos, setCargos] = useState<ICargoResponse>({data: []})
+    const cargoDataContext = useCargoDataContext()
 
     const getCargos = async () =>{
         const url = "http://localhost:8000"

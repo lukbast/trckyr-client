@@ -5,13 +5,12 @@ import "./cargo-preview.scss"
 
 
 const CargoPreview = ():JSX.Element => {
-
+    
     const windowContext = useCargoWindowContext()
     const dataContext = useCargoDataContext()
-
     const renderCargoDetails = ():JSX.Element =>{
         const i = windowContext.state.selected
-        const data = dataContext.state.data[i-1]
+        const data = dataContext.state.data[i]
         return(
             <div className="section details">
                 <div className="row"><b>ID:</b> {data._id} </div>

@@ -17,11 +17,14 @@ const DriverPreview:FC = ():JSX.Element =>{
         return (
             <div className="section details">
                 <div className="row"><b>ID:</b> {data._id} </div>
-                <div className="row"><b>First name:</b> {data.firstName} </div>
-                <div className="row"><b>Last name:</b> {data.lastName} </div>
-                <div className="row"><b>Added by:</b>  {data.addedBy} </div>
+                <div className="row"><b>First name:</b> {data.firstname} </div>
+                <div className="row"><b>Last name:</b> {data.lastname} </div>
+                <div className="row"><b>Phone number:</b>  {data.phone} </div>
+                <div className="row"><b>Email:</b>  {data.email} </div>
+                <div className="row"><b>Added by:</b>  {data.addedby} </div>
                 <div className="row"><b>Added</b> {data.added} </div>
-                <div className="row"><b>Last modified:</b> {data.lastModified} </div>
+                <div className="row"><b>Last modified:</b> {data.lastmodified} </div>
+                <div className="row"><b>Modified by:</b> {data.modifiedby} </div>
             </div>
     )}
 

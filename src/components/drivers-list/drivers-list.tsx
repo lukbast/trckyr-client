@@ -16,7 +16,7 @@ const DriversList:FC = ():JSX.Element =>{
     const [orderingState, setOrderingState] = useState<IState>({columnName: "id", descending:false})
 
     const onItemCLick = (id: number) => {
-      driversWindowContext.dispatch({type:WindowActions.SHOW_SELECTED, payload: id})
+      driversWindowContext.dispatch({type:WindowActions.SHOW_SELECTED, payload: id -1})
     }
 
     const sortItems = () =>{
@@ -27,10 +27,10 @@ const DriversList:FC = ():JSX.Element =>{
             listOfElements = quickSort(data, 0, data.length -1, "_id")
             break;
           case "firstName":
-            listOfElements = quickSort(data, 0, data.length -1, "firstName")
+            listOfElements = quickSort(data, 0, data.length -1, "firstname")
             break;
           case "lastName":
-            listOfElements = quickSort(data, 0, data.length -1, "lastName")
+            listOfElements = quickSort(data, 0, data.length -1, "lastname")
             break;
         }
           if (orderingState.descending){
@@ -43,11 +43,11 @@ const DriversList:FC = ():JSX.Element =>{
 
     const renderItem =  (data:IDriverData, key:number):JSX.Element =>{
         return(
-          <div className={driversWindowContext.state.selected === data._id? "row cols-3 selected": "row cols-3"} 
+          <div className={driversWindowContext.state.selected === data._id -1 ? "row cols-3 selected": "row cols-3"} 
           onClick={() =>{ onItemCLick(data._id)}} key={key}>
             <div className="field">{data._id}</div>
-            <div className="field">{data.lastName}</div>
-            <div className="field">{data.firstName}</div>
+            <div className="field">{data.lastname}</div>
+            <div className="field">{data.firstname}</div>
           </div>
         )
       }

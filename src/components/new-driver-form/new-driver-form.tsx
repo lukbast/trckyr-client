@@ -8,13 +8,14 @@ const NewDriverForm:FC = ():JSX.Element =>{
 
     const defaultState:IDriverData = {
         _id: driverDataContext.state.length,
-        firstName: "",
-        lastName: "",
+        firstname: "",
+        lastname: "",
         phone: "",
         email: "",
-        addedBy: "TEST ACCOUNT",
+        addedby: "TEST ACCOUNT",
         added: "23/05/2021",
-        lastModified: "30/02/2022" 
+        lastmodified: "30/02/2022",
+        modifiedby: "asdaf" 
     }
 
     const [state, setState] = useState<IDriverData>(defaultState)

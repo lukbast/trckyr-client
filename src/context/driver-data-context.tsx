@@ -5,35 +5,41 @@ import {removeData} from "../utils"
 
 const defaultState:IDriverData[] = [
     {_id: 0,
-    firstName: "Grzegorz",
-    lastName: "Brzęszyczykiewicz",
+    firstname: "Grzegorz",
+    lastname: "Brzęszyczykiewicz",
     phone: "123456789",
     email: "gbrzeszcz@asdfmail.com",
-    addedBy: "TEST ACCOUNT",
+    addedby: "TEST ACCOUNT",
     added: "23/05/2021",
-    lastModified: "30/02/2022" 
+    lastmodified: "30/02/2022",
+    modifiedby: "adf" 
     },
     {_id: 1,
-    firstName: "John",
-    lastName: "Doe",
-    phone: "987654321",
-    email: "john.doe@qwertymail.com",
-    addedBy: "TEST ACCOUNT",
+    firstname: "Grzegorz",
+    lastname: "Brzęszyczykiewicz",
+    phone: "123456789",
+    email: "gbrzeszcz@asdfmail.com",
+    addedby: "TEST ACCOUNT",
     added: "23/05/2021",
-    lastModified: "30/02/2022" },
+    lastmodified: "30/02/2022",
+    modifiedby: "adf" 
+    },
     {_id: 2,
-    firstName: "Random",
-    lastName: "Dude",
-    phone: "112233445566",
-    email: "dude@zxcvbmail.com",
-    addedBy: "TEST ACCOUNT",
+    firstname: "Grzegorz",
+    lastname: "Brzęszyczykiewicz",
+    phone: "123456789",
+    email: "gbrzeszcz@asdfmail.com",
+    addedby: "TEST ACCOUNT",
     added: "23/05/2021",
-    lastModified: "30/02/2022" }
+    lastmodified: "30/02/2022",
+    modifiedby: "adf" 
+    }
 ]
 
 type State = typeof defaultState
 
 export enum ActionTypes {
+    "FETCH_DATA",
     "ADD_DRIVER",
     "EDIT_DRIVER",
     "DELETE_DRIVER"
@@ -41,7 +47,8 @@ export enum ActionTypes {
 
 interface IAction{
     type: ActionTypes,
-    payload: IDriverData
+    payload: IDriverData,
+    tempPayload?: IDriverData[]
 }
 
 interface IDriverDataContext {
@@ -57,6 +64,8 @@ const DriverDataContext = createContext<IDriverDataContext>({state: defaultState
 
 function cargoReducer (state: State, action: IAction):State {
     switch (action.type){
+        case ActionTypes.FETCH_DATA:
+            return action.tempPayload as IDriverData[]
         case ActionTypes.ADD_DRIVER:
             const tempData = [...state]
             tempData.push(action.payload)

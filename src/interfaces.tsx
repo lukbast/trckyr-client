@@ -34,13 +34,18 @@ export interface ICargoResponse{
 
 export interface IDriverData{
     _id: number,
-    firstName: string,
-    lastName: string,
+    firstname: string,
+    lastname: string,
     phone: string,
     email: string,
-    addedBy: string,
+    addedby: string,
     added: string,
-    lastModified: string
+    lastmodified: string,
+    modifiedby: string
+}
+
+export interface IDriverResponse{
+    data: IDriverData[]
 }
 
 export interface ITransportFormState{

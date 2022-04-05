@@ -19,7 +19,7 @@ const CargoList:FC =  ():JSX.Element =>{
 
 
   const onItemCLick = (id: number) => {
-    cargoWindowContext.dispatch({type:WindowActionTypes.SHOW_SELECTED, payload: id})
+    cargoWindowContext.dispatch({type:WindowActionTypes.SHOW_SELECTED, payload: id - 1})
   }
 
 
@@ -43,7 +43,7 @@ const CargoList:FC =  ():JSX.Element =>{
 
   const renderItem =  (data:ICargoData, key:number):JSX.Element =>{
     return(
-      <div className={cargoWindowContext.state.selected === data._id? "row cols-2 selected": "row cols-2"} 
+      <div className={cargoWindowContext.state.selected === (data._id - 1 )? "row cols-2 selected": "row cols-2"} 
       onClick={() =>{ onItemCLick(data._id)}} key={key}>
         <div className="field">{data._id}</div>
         <div className="field">{data.name}</div>
