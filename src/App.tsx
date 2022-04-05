@@ -9,7 +9,7 @@ export interface User{
 
 function App():JSX.Element {
 
-  const [user, setUser] = useState<User>({username: "TEST ACCOUNT"})
+  const [user, setUser] = useState<User>({username: ""})
 
   const logOut =() => {
     setUser({username: ""})

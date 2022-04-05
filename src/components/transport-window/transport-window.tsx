@@ -49,8 +49,8 @@ const TransportWindow:FC<IProps> = ({data}):JSX.Element =>{
                     <div className="row">
                         <div className="field">{cargo._id}</div>
                         <div className="field">{cargo.name}</div>
-                        <div className="field">{cargo.quantity} {cargo.quantityUnit}</div>
-                        <div className="field">{cargo.weight} {cargo.weightUnit}</div>
+                        <div className="field">{cargo.quantity} {cargo.quantityunit}</div>
+                        <div className="field">{cargo.weight} {cargo.weightunit}</div>
                     </div>
 
                 </div>

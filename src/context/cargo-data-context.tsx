@@ -5,41 +5,23 @@ import { removeData } from "../utils";
 const defaultState = {
     data : [
         {_id: 0,
-        name: "Chocolate bars",
-        weight: 10000,
-        weightUnit: "kg",
-        quantity: 1000000,
-        quantityUnit: "pcs",
+        name: "",
+        weight: 0,
+        weightunit: "",
+        quantity: 0,
+        quantityunit: "",
         info: "",
-        addedBy: "TEST ACCOUNT",
-        added: "23/05/2021",
-        lastModified: "30/02/2022" },
-        {_id: 1,
-        name: "Cars",
-        weight: 20000,
-        weightUnit: "kg",
-        quantity: 6,
-        quantityUnit: "pcs",
-        info: "",
-        addedBy: "TEST ACCOUNT",
-        added: "23/05/2021",
-        lastModified: "30/02/2022" },
-        {_id: 2,
-        name: "Windows",
-        weight: 8000,
-        weightUnit: "kg",
-        quantity: 1000,
-        quantityUnit: "pcs",
-        info: "Fragile",
-        addedBy: "TEST ACCOUNT",
-        added: "23/05/2021",
-        lastModified: "30/02/2022" },
+        addedby: "",
+        added: "",
+        lastmodified: "", 
+        modifiedby: "" }
     ]
 }
 
 export type State  = typeof defaultState
 
 export enum ActionTypes {
+    "FETCH_DATA",
     "ADD_CARGO",
     "DELETE_CARGO",
     "EDIT_CARGO"
@@ -47,7 +29,8 @@ export enum ActionTypes {
 
 interface IAction{
     type: ActionTypes,
-    payload: ICargoData
+    payload: ICargoData,
+    tempPayload?: ICargoData[]
 }
 
 interface ICargoDataContext {
@@ -65,6 +48,8 @@ const CargoContext = createContext<ICargoDataContext>({state: defaultState, disp
 
 function cargoReducer (state: State, action: IAction):State {
     switch (action.type){
+        case ActionTypes.FETCH_DATA:
+            return {data: action.tempPayload as ICargoData[]}
         case ActionTypes.ADD_CARGO:
             const newData = state.data
             newData.push(action.payload)
@@ -73,7 +58,7 @@ function cargoReducer (state: State, action: IAction):State {
             })
         case ActionTypes.DELETE_CARGO:
             const cleanedData = removeData(action.payload._id, state.data)
-            return({data :cleanedData})
+            return({data: cleanedData})
         case ActionTypes.EDIT_CARGO:
             const tempData = state.data
             tempData[action.payload._id] = action.payload

@@ -18,13 +18,18 @@ export interface ICargoData{
     _id: number,
     name: string,
     weight: number,
-    weightUnit: string,
+    weightunit: string,
     quantity: number,
-    quantityUnit: string,
+    quantityunit: string,
     info: string,
-    addedBy: string,
+    addedby: string,
     added: string,
-    lastModified: string,
+    lastmodified: string,
+    modifiedby: string,
+}
+
+export interface ICargoResponse{
+    data: ICargoData[]
 }
 
 export interface IDriverData{
@@ -59,4 +64,11 @@ export interface ITransportStatus {
     remaining: number,
     eta: string,
     coordinates: number[]
+}
+
+export enum FetchState {
+    "DEFAULT",
+    "LOADING",
+    "SUCCESS",
+    "ERROR"
 }

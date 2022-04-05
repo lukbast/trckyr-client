@@ -17,3 +17,6 @@ export function removeData<T extends Iid>(id : number, data: T[] ){
 
     return cleanedData
 }
+
+
+

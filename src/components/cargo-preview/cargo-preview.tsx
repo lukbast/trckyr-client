@@ -11,17 +11,18 @@ const CargoPreview = ():JSX.Element => {
 
     const renderCargoDetails = ():JSX.Element =>{
         const i = windowContext.state.selected
-        const data = dataContext.state.data[i]
+        const data = dataContext.state.data[i-1]
         return(
             <div className="section details">
                 <div className="row"><b>ID:</b> {data._id} </div>
                 <div className="row"><b>Name:</b> {data.name} </div>
-                <div className="row"><b>Quantity:</b> {data.quantity} {data.quantityUnit}</div>
-                <div className="row"><b>Weight:</b> {data.weight} {data.weightUnit} </div>
+                <div className="row"><b>Quantity:</b> {data.quantity} {data.quantityunit}</div>
+                <div className="row"><b>Weight:</b> {data.weight} {data.weightunit} </div>
                 {data.info? <div className="row"><b>Additional info:</b> {data.info} </div> : ""}
-                <div className="row"><b>Added by</b> {data.addedBy} </div>
+                <div className="row"><b>Added by</b> {data.addedby} </div>
                 <div className="row"><b>Added</b> {data.added} </div>
-                <div className="row"><b>Last modified:</b> {data.lastModified} </div>
+                <div className="row"><b>Last modified:</b> {data.lastmodified} </div>
+                <div className="row"><b>Last modified:</b> {data.modifiedby} </div>
             </div>
         )
     }
