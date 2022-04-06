@@ -10,7 +10,7 @@ import { useFetchDrivers } from "./requests/fetch-drivers"
 import { useCargoDataContext, ActionTypes as CargoActions } from "./context/cargo-data-context"
 import { useDriverDataContext, ActionTypes as DriverActions  } from "./context/driver-data-context"
 import { useTransportDataContext, ActionTypes as TransportActions } from './context/transport-data-context';
-import { UserActions, useUser } from './context/user-context';
+import { UserActions, useUser } from './context/user-context/user-context';
 import { FetchState } from "./interfaces"
 import { useFetchTransports } from './requests/fetch-transports';
 

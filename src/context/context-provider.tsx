@@ -5,7 +5,7 @@ import { SelectedTransportProvider } from './selected-transport-context';
 import { CargoDataProvider } from './cargo-data-context';
 import { DriverDataProvider } from './driver-data-context';
 import { TransportDataProvider } from './transport-data-context';
-import { UserProvider } from './user-context';
+import { UserProvider } from './user-context/user-context';
 
 interface IContextProviderProps {
     children : any

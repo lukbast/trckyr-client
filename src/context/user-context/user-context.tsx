@@ -1,31 +1,31 @@
 import { createContext, useReducer, useContext, ReactNode } from "react";
-import { User } from "../interfaces";
+import { User } from "../../interfaces";
  
-const defaultState:User = {
+export const defaultState:User = {
     username: "",
     loggedIn: false
 }
 
 export enum UserActions {"LOG IN", "LOG OUT"}
-type State = typeof defaultState
+export type State = typeof defaultState
 
-type Action = {
+export type Action = {
     type: UserActions,
     payload: User
 }
 
-interface IProviderProps {
+export interface IProviderProps {
     children : ReactNode
 }
 
-interface IContext {
+export interface IContext {
     state: State,
     dispatch: React.Dispatch<Action>
 }
 
 const UserContext = createContext<IContext>({state: defaultState, dispatch:() => undefined})
 
-const userReducer = (state: State, action: Action) => {
+export const userReducer = (state: State, action: Action) => {
     switch (action.type){
         case UserActions["LOG IN"]:
             return action.payload
