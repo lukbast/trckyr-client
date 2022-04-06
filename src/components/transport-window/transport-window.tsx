@@ -34,9 +34,7 @@ const TransportWindow:FC<IProps> = ({data}):JSX.Element =>{
 
     }
     const renderCargo = () => {
-        console.log(cargoDataContext.state)
-        const cargo = cargoDataContext.state[data.cargo]
-        console.log(cargo)
+        const cargo = cargoDataContext.state[data.cargo - 1]
         
         return(
             <div className="table cargo hide-srollbars" >
