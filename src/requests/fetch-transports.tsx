@@ -1,24 +1,23 @@
 import { useState } from "react";
-import { FetchState, ICargoData } from "../interfaces";
+import { FetchState, ITransportData } from "../interfaces";
 import axios from  "axios"
 
-export function useFetchCargos(){
+export function useFetchTransports(){
     const [fetchState, setFetchState] = useState(FetchState.DEFAULT)
-    const [cargos, setCargos] = useState<ICargoData[]>([])
+    const [transports, setTransports] = useState<ITransportData[]>([])
 
     const getCargos = async () =>{
         const url = "http://localhost:8000"
         try {
             setFetchState(FetchState.LOADING)
 
-            const res = await axios.get(`${url}/cargos`)
-            const data = res.data.data as ICargoData[];
-            console.log(data)
-            setCargos(data)
+            const res = await axios.get(`${url}/transports`)
+            const data = res.data.data as ITransportData[];
+            setTransports(data)
             setFetchState(FetchState.SUCCESS)
         } catch {
             setFetchState(FetchState.ERROR)
         }
     }
-    return [cargos, fetchState, getCargos] as const;
+    return [transports, fetchState, getCargos] as const;
 }

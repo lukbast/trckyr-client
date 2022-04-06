@@ -24,7 +24,7 @@ const TransportForm:FC<IProps> = ({data, onChange, submitFunction, handleSelectC
     const createDriversOptions = (data:any):any[] =>{
         const optionsList: any[] = []
         for (let i = 0; i < data.length; i++){
-            optionsList.push(<option key={i} value={data[i]["_id"]}>{`${data[i]["firstName"]} ${data[i]["lastName"]}`}</option>)
+            optionsList.push(<option key={i} value={data[i]["_id"]}>{`${data[i]["firstname"]} ${data[i]["lastname"]}`}</option>)
         }
         return optionsList
     }
@@ -45,7 +45,7 @@ const TransportForm:FC<IProps> = ({data, onChange, submitFunction, handleSelectC
             options = createDriversOptions(data)
         }
         if (nameOfField === "cargo"){
-            const data = cargoDataContex.state.data
+            const data = cargoDataContex.state
             options = createCargoOptions(data)
         }
         
@@ -64,8 +64,8 @@ const TransportForm:FC<IProps> = ({data, onChange, submitFunction, handleSelectC
         <div className="transport-form-container">
             <div className="driver-form transport-form">
                 <Input value={data.name} labelText="Name" type="text" length="long" name="name" onChange={onChange}/>
-                <Input value={data.from} labelText="From" type="text" length="long" name="from" onChange={onChange}/>
-                <Input value={data.to} labelText="To" type="text" length="long" name="to" onChange={onChange}/>
+                <Input value={data.from_} labelText="From" type="text" length="long" name="from" onChange={onChange}/>
+                <Input value={data.to_} labelText="To" type="text" length="long" name="to" onChange={onChange}/>
 
                 <Button text={buttonText} onClick={submitFunction}/>
                 

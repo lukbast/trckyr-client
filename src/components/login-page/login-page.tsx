@@ -1,10 +1,9 @@
 import { useState } from "react"
-import { User } from "../../App"
+import { User } from "../../interfaces"
 
 
 import Button from "../button/button"
 import Input from "../input/input"
-
 
 import "./login-page.scss"
 
@@ -16,14 +15,13 @@ interface IState{
 }
 
 interface IProps{
-    setUser: any
+    loginIn: any
     user: User
 }
 
-const LoginPage:React.FC<IProps> = ({setUser, user}):JSX.Element =>{
+const LoginPage:React.FC<IProps> = ({loginIn, user}):JSX.Element =>{
 
     const [state, setState] = useState<IState["formData"]>({username:"", password:""})
-    
 
     const changeListener = (e: React.ChangeEvent<HTMLInputElement>) =>{
         setState({...state,
@@ -32,11 +30,9 @@ const LoginPage:React.FC<IProps> = ({setUser, user}):JSX.Element =>{
     }
 
     const btnClickClistener = async () =>{
-        // TODO DISPLAY SPINNER
-        setUser({...user, ...state})
+        loginIn(state.username, state.password)
         
     }
-
 
     return(
         <div className="login-page">
@@ -48,6 +44,5 @@ const LoginPage:React.FC<IProps> = ({setUser, user}):JSX.Element =>{
         </div>
     )
 }
-
 
 export default LoginPage

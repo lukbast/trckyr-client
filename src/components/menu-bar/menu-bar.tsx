@@ -1,5 +1,4 @@
 import { FC } from "react"
-import { User } from "../../App"
 import { useWindowState } from "../../context/window-context"
 import MenuBarButton from "../menu-bar-button/menu-bar-button"
 import "./menu-bar.scss"
@@ -8,6 +7,7 @@ import "./menu-bar.scss"
 import driverIcon from "../../assets/driver.svg"
 import cargoIcon from "../../assets/cargo.svg"
 import transportIcon from "../../assets/transport.svg"
+import { User } from "../../interfaces"
 
 interface IProps{
     user: User,

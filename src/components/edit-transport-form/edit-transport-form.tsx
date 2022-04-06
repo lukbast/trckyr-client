@@ -14,9 +14,10 @@ const EditTransportForm:FC = ():JSX.Element =>{
     let toEdit = transportDataContext.state[selectedTransportContext.state.index]
 
     const defaultState:ITransportFormState = {name:toEdit.name, 
-        to:toEdit.to, from:toEdit.from, 
-        drivers:toEdit.drivers, 
-        cargo:toEdit.cargo
+        to_: toEdit.to_, 
+        from_:toEdit.from_, 
+        drivers: toEdit.drivers, 
+        cargo: toEdit.cargo
     } 
     const [state, setState] =  useState(defaultState)
 

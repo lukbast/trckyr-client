@@ -3,38 +3,7 @@ import { IDriverData } from "../interfaces";
 import {removeData} from "../utils"
 
 
-const defaultState:IDriverData[] = [
-    {_id: 0,
-    firstname: "Grzegorz",
-    lastname: "Brzęszyczykiewicz",
-    phone: "123456789",
-    email: "gbrzeszcz@asdfmail.com",
-    addedby: "TEST ACCOUNT",
-    added: "23/05/2021",
-    lastmodified: "30/02/2022",
-    modifiedby: "adf" 
-    },
-    {_id: 1,
-    firstname: "Grzegorz",
-    lastname: "Brzęszyczykiewicz",
-    phone: "123456789",
-    email: "gbrzeszcz@asdfmail.com",
-    addedby: "TEST ACCOUNT",
-    added: "23/05/2021",
-    lastmodified: "30/02/2022",
-    modifiedby: "adf" 
-    },
-    {_id: 2,
-    firstname: "Grzegorz",
-    lastname: "Brzęszyczykiewicz",
-    phone: "123456789",
-    email: "gbrzeszcz@asdfmail.com",
-    addedby: "TEST ACCOUNT",
-    added: "23/05/2021",
-    lastmodified: "30/02/2022",
-    modifiedby: "adf" 
-    }
-]
+const defaultState:IDriverData[] = []
 
 type State = typeof defaultState
 

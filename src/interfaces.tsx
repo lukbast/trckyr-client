@@ -1,15 +1,16 @@
 export interface ITransportData {
     _id: number,
     name: string,
-    from: string,
-    to: string,
+    from_: string,
+    to_: string,
     drivers: number[],
     cargo: number,
     total: number,
     state: string,
-    addedBy: string,
+    addedby: string,
     added: string,
-    lastModified: string,
+    lastmodified: string,
+    modifiedby: string
     statuses: ITransportStatus[]
 
 }
@@ -28,10 +29,6 @@ export interface ICargoData{
     modifiedby: string,
 }
 
-export interface ICargoResponse{
-    data: ICargoData[]
-}
-
 export interface IDriverData{
     _id: number,
     firstname: string,
@@ -44,14 +41,11 @@ export interface IDriverData{
     modifiedby: string
 }
 
-export interface IDriverResponse{
-    data: IDriverData[]
-}
 
 export interface ITransportFormState{
     name: string
-    from: string,
-    to: string,
+    from_: string,
+    to_: string,
     drivers: number[]
     cargo: number
 } 
@@ -61,14 +55,14 @@ export enum states {"Waiting for dispatch", "Moving", "Taking a short break", "B
 
 export interface ITransportStatus {
     _id: number,
-    transportID: number,
+    transportid: number,
     state: states,
-    begginingOfState: string,
-    endOfState: string,
+    begginingofstate: string,
+    endofstate: string,
     duration: string,
     remaining: number,
     eta: string,
-    coordinates: number[]
+    coordinates: number[],
 }
 
 export enum FetchState {
@@ -76,4 +70,9 @@ export enum FetchState {
     "LOADING",
     "SUCCESS",
     "ERROR"
+}
+
+export interface User {
+    username: string,
+    loggedIn: boolean
 }

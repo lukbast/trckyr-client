@@ -13,7 +13,6 @@ interface IProps {
     data: ITransportData,
 }
 
-
 const TransportWindow:FC<IProps> = ({data}):JSX.Element =>{
 
     const cargoDataContext = useCargoDataContext()
@@ -35,8 +34,10 @@ const TransportWindow:FC<IProps> = ({data}):JSX.Element =>{
 
     }
     const renderCargo = () => {
-        const cargo = cargoDataContext.state.data[data.cargo]
-
+        console.log(cargoDataContext.state)
+        const cargo = cargoDataContext.state[data.cargo]
+        console.log(cargo)
+        
         return(
             <div className="table cargo hide-srollbars" >
                     <div className="title">Cargo</div>
@@ -82,17 +83,17 @@ const TransportWindow:FC<IProps> = ({data}):JSX.Element =>{
             </div>
         )
     }
+
     const renderStatuses = () => {
         const statues:ITransportStatus[] = data.statuses
         const rows = []
-
         for (let i = statues.length - 1; i> - 1; i--){
             rows.push(<div className="row">
                         <div className="field">{statues[i]._id}</div>
-                        <div className="field">{states[statues[i].state]}</div>
+                        <div className="field">{statues[i].state}</div>
                         <div className="field">{statues[i].duration}</div>
-                        <div className="field">{statues[i].begginingOfState}</div>
-                        <div className="field">{statues[i].endOfState}</div>
+                        <div className="field">{statues[i].begginingofstate}</div>
+                        <div className="field">{statues[i].endofstate}</div>
                     </div>)
         }
 
@@ -111,10 +112,6 @@ const TransportWindow:FC<IProps> = ({data}):JSX.Element =>{
         )
     }
 
-
-
-
-
     const renderTransportWindow = ():JSX.Element =>{
         let isData:boolean = false
         const lastStatusIndex:number = data.statuses.length - 1
@@ -128,14 +125,15 @@ const TransportWindow:FC<IProps> = ({data}):JSX.Element =>{
                 </div>
                 <div className="section details">
                     <div className="row"><b>Name:</b> <span>{data.name}</span></div>
-                    <div className="row"><b>From:</b> <span>{data.from}</span></div>
-                    <div className="row"><b>To:</b> <span>{data.to}</span></div>
+                    <div className="row"><b>From:</b> <span>{data.from_}</span></div>
+                    <div className="row"><b>To:</b> <span>{data.to_}</span></div>
                     <div className="row"><b>Total:</b> <span>{data.total} km</span></div>
                     <div className="row"><b>Remaining:</b> <span>{data.statuses[lastStatusIndex].remaining} km</span></div>
                     <div className="row"><b>ETA:</b> <span>{data.statuses[lastStatusIndex].eta}</span></div>
-                    <div className="row"><b>Added by:</b> <span>{data.addedBy}</span></div>
+                    <div className="row"><b>Added by:</b> <span>{data.addedby}</span></div>
                     <div className="row"><b>Added:</b> <span>{data.added}</span></div>
-                    <div className="row"><b>Last modified:</b> <span>{data.lastModified}</span></div>
+                    <div className="row"><b>Last modified:</b> <span>{data.lastmodified}</span></div>
+                    <div className="row"><b>Modified by:</b> <span>{data.modifiedby}</span></div>
                 </div>
 
                 <div className="section map-container">

@@ -10,7 +10,7 @@ const CargoPreview = ():JSX.Element => {
     const dataContext = useCargoDataContext()
     const renderCargoDetails = ():JSX.Element =>{
         const i = windowContext.state.selected
-        const data = dataContext.state.data[i]
+        const data = dataContext.state[i]
         return(
             <div className="section details">
                 <div className="row"><b>ID:</b> {data._id} </div>
@@ -29,7 +29,7 @@ const CargoPreview = ():JSX.Element => {
     const deleteItem = () =>{
         const selected = windowContext.state.selected
         windowContext.dispatch({type: WindowActions.SHOW_SELECTED, payload: 0})
-        dataContext.dispatch({type: DataActions.DELETE_CARGO, payload: dataContext.state.data[selected]})
+        dataContext.dispatch({type: DataActions.DELETE_CARGO, payload: dataContext.state[selected]})
     }
 
     return(

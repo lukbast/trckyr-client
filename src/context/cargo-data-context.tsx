@@ -2,21 +2,7 @@ import { createContext, useReducer, useContext, ReactNode } from "react";
 import { ICargoData } from "../interfaces";
 import { removeData } from "../utils";
 
-const defaultState = {
-    data : [
-        {_id: 0,
-        name: "",
-        weight: 0,
-        weightunit: "",
-        quantity: 0,
-        quantityunit: "",
-        info: "",
-        addedby: "",
-        added: "",
-        lastmodified: "", 
-        modifiedby: "" }
-    ]
-}
+const defaultState:ICargoData[] = []
 
 export type State  = typeof defaultState
 
@@ -49,20 +35,18 @@ const CargoContext = createContext<ICargoDataContext>({state: defaultState, disp
 function cargoReducer (state: State, action: IAction):State {
     switch (action.type){
         case ActionTypes.FETCH_DATA:
-            return {data: action.tempPayload as ICargoData[]}
+            return  action.tempPayload as ICargoData[]
         case ActionTypes.ADD_CARGO:
-            const newData = state.data
+            const newData = state
             newData.push(action.payload)
-            return({...state,
-                data: newData
-            })
+            return(newData)
         case ActionTypes.DELETE_CARGO:
-            const cleanedData = removeData(action.payload._id, state.data)
-            return({data: cleanedData})
+            const cleanedData = removeData(action.payload._id, state)
+            return(cleanedData)
         case ActionTypes.EDIT_CARGO:
-            const tempData = state.data
+            const tempData = state
             tempData[action.payload._id] = action.payload
-            return ({data: tempData})
+            return (tempData)
      }
 }
 

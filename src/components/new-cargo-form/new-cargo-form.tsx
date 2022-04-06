@@ -8,7 +8,7 @@ const NewCargoForm:FC = ():JSX.Element =>{
     const cargoContext  = useCargoDataContext()
 
     const defaultState:ICargoData = {
-        _id: cargoContext.state.data.length,
+        _id: cargoContext.state.length,
         name: "",
         quantity: 0,
         quantityunit: "",

@@ -24,7 +24,7 @@ const CargoList:FC =  ():JSX.Element =>{
 
 
   const sortItems = () =>{
-    const data = cargoDataContext.state.data
+    const data = cargoDataContext.state
     let listOfElements:ICargoData[] = []
     switch(orderingState.columnName){
       case "id":

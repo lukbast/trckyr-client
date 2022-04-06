@@ -1,10 +1,10 @@
 import { useState } from "react";
-import { FetchState, IDriverResponse } from "../interfaces";
+import { FetchState, IDriverData, } from "../interfaces";
 import axios from  "axios"
 
 export function useFetchDrivers(){
     const [fetchState, setFetchState] = useState(FetchState.DEFAULT)
-    const [drivers, setDrivers] = useState<IDriverResponse>({data: []})
+    const [drivers, setDrivers] = useState<IDriverData[]>([])
 
     const getDrivers= async () =>{
         const url = "http://localhost:8000"
@@ -12,7 +12,7 @@ export function useFetchDrivers(){
             setFetchState(FetchState.LOADING)
 
             const res = await axios.get(`${url}/drivers`)
-            const data = res.data as IDriverResponse;
+            const data = res.data.data as IDriverData[];
 
             setDrivers(data)
             setFetchState(FetchState.SUCCESS)

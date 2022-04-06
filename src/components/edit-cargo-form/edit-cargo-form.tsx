@@ -10,7 +10,7 @@ const EditCargoForm:FC = ():JSX.Element => {
     const cargoDataContext  = useCargoDataContext()
     const cargoWindowContext = useCargoWindowContext()
 
-    const [state, setState] = useState(cargoDataContext.state.data[cargoWindowContext.state.selected])
+    const [state, setState] = useState(cargoDataContext.state[cargoWindowContext.state.selected])
 
     const onChange = (e: React.ChangeEvent<HTMLInputElement>) =>{
         setState({...state,

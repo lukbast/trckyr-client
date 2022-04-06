@@ -14,15 +14,16 @@ const NewTransportForm:FC = ():JSX.Element =>{
     const defaultState:ITransportData = {
         _id: transportDataContext.state.length, 
         name: "",
-        from: "",
-        to: "",
+        from_: "",
+        to_: "",
         drivers:[0],
         cargo: 0,
         total:123, 
         state: "In progress", 
-        addedBy: "TEST ACCOUNT",
+        addedby: "TEST ACCOUNT",
         added: "23/05/2021",
-        lastModified: "30/02/2022",
+        lastmodified: "30/02/2022",
+        modifiedby: "30/02/2022",
         statuses: statusesPlaceholder
     } 
     const [state, setState] =  useState(defaultState)
