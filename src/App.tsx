@@ -6,18 +6,19 @@ import MainWindow from './components/main-window/main-window';
 
 import { useFetchCargos } from "./requests/fetch-cargo"
 import { useFetchDrivers } from "./requests/fetch-drivers"
+
 import { useCargoDataContext, ActionTypes as CargoActions } from "./context/cargo-data-context"
 import { useDriverDataContext, ActionTypes as DriverActions  } from "./context/driver-data-context"
 import { useTransportDataContext, ActionTypes as TransportActions } from './context/transport-data-context';
-
-import { FetchState, User } from "./interfaces"
+import { UserActions, useUser } from './context/user-context';
+import { FetchState } from "./interfaces"
 import { useFetchTransports } from './requests/fetch-transports';
 
 
 
 function App():JSX.Element {
 
-  const [user, setUser] = useState<User>({username: "", loggedIn: false})
+  const user =  useUser().state; const dispatchUser = useUser().dispatch
 
   const cargoDataContext = useCargoDataContext()
   const driversDataContext = useDriverDataContext()
@@ -68,11 +69,11 @@ function App():JSX.Element {
 },[transportsFetched, transportsFetchStatus, user.loggedIn])
 
   const logOut = () => {
-    setUser({username: "", loggedIn: false})
+    dispatchUser({type:UserActions['LOG IN'] ,payload: user})
   }
 
   const logIn = (uname:string, psswd:string) => {
-    setUser({username: uname, loggedIn: true})
+    dispatchUser({type:UserActions['LOG IN'] , payload: {username: uname, loggedIn: true}})
   }
 
   return (
