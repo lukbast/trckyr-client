@@ -1,21 +1,21 @@
-import {useFetchDrivers} from "./fetch-drivers"
+import {useFetchCargos} from "./fetch-cargo"
 import {renderHook, act} from '@testing-library/react-hooks'
-import { FetchState } from "../interfaces";
+import { FetchState } from "../../interfaces";
 import axios from "axios";
-import { API_URL } from "../global-vars";
+import { API_URL } from "../../global-vars";
 import faker from 'faker'
 
 
 describe('fetching cargos hook', () =>{
-    const renderCustomHook = () => renderHook(() => useFetchDrivers());
+    const renderCustomHook = () => renderHook(() => useFetchCargos());
 
     it("should return initual value", () => {
         const hook = renderCustomHook();
-        const [drivers, fetchState, getDrivers] = hook.result.current;
+        const [cargos, fetchState, getCargos] = hook.result.current;
 
-        expect(drivers).toEqual([]);
+        expect(cargos).toEqual([]);
         expect(fetchState).toBe(FetchState.DEFAULT);
-        expect(typeof getDrivers).toBe('function');
+        expect(typeof getCargos).toBe('function');
     })
 
 
@@ -23,33 +23,33 @@ describe('fetching cargos hook', () =>{
         const axiosGetSpy = jest.spyOn(axios, 'get').mockResolvedValue({data: []})
 
         const hook = renderCustomHook();
-        const getDrivers = hook.result.current[2];
+        const getCargos = hook.result.current[2];
 
         await act( async () => {
-            await getDrivers();
+            await getCargos();
         })
         
 
         expect(axiosGetSpy).toBeCalledTimes(1);
-        expect(axiosGetSpy).toBeCalledWith(`${API_URL}/drivers`)
+        expect(axiosGetSpy).toBeCalledWith(`${API_URL}/cargos`)
     })
 
     it('should have expected states on api call', async () =>{
         jest.spyOn(axios, 'get').mockResolvedValue({data: []})
 
         const hook = renderCustomHook();
-        const getDrivers = hook.result.current[2];
+        const getCargos = hook.result.current[2];
 
         // We don't want to await for act because it will set state to SUCESS
         // What we want to do to test if fetch state is being set to LOADING before
         // request is resolved
         const promiseAct = act( async () => {
-            await getDrivers();
+            await getCargos();
         })
         
-        const [drivers, fetchState] = hook.result.current;
+        const [cargos, fetchState] = hook.result.current;
 
-        expect(drivers).toEqual([])
+        expect(cargos).toEqual([])
         expect(fetchState).toBe(FetchState.LOADING)
 
         // Now we await to make compiler happy and to avoid unexpected behavior
@@ -60,50 +60,53 @@ describe('fetching cargos hook', () =>{
         jest.spyOn(axios, 'get').mockRejectedValue({})
 
         const hook = renderCustomHook();
-        const getDrivers = hook.result.current[2];
+        const getCargos = hook.result.current[2];
 
         await act( async () => {
-            await getDrivers();
+            await getCargos();
         })
         
-        const [drivers, fetchState] = hook.result.current;
+        const [cargos, fetchState] = hook.result.current;
 
-        expect(drivers).toEqual([])
+        expect(cargos).toEqual([])
         expect(fetchState).toEqual(FetchState.ERROR)
 
     })
 
 
     it('should have expected states on api sucess', async () => {
-        const mockDrivers = {
+        const mockCargos = {
             data: {data: [
                 {
                     _id: faker.datatype.number(),
-                    firstname: faker.datatype.string(),
-                    lastname: faker.datatype.string(),
-                    phone: faker.datatype.string(),
-                    email: faker.datatype.string(),
+                    name: faker.datatype.string(),
+                    weight: faker.datatype.number(),
+                    weightunit: faker.datatype.string(),
+                    quantity: faker.datatype.number(),
+                    quantityunit: faker.datatype.string(),
+                    info: faker.datatype.string(),
                     addedby: faker.datatype.string(),
                     added: faker.datatype.string(),
                     lastmodified: faker.datatype.string(),
-                    modifiedby: faker.datatype.string()
+                    modifiedby: faker.datatype.string(),
                 },
             ],
         }};
 
-        jest.spyOn(axios, 'get').mockResolvedValue(mockDrivers)
+        jest.spyOn(axios, 'get').mockResolvedValue(mockCargos)
 
         const hook = renderCustomHook();
-        const getDrivers = hook.result.current[2];
+        const getCargos = hook.result.current[2];
 
         await act( async () => {
-            await getDrivers();
+            await getCargos();
         })
         
-        const [drivers, fetchState] = hook.result.current;
+        const [cargos, fetchState] = hook.result.current;
 
-        expect(drivers).toEqual(mockDrivers.data.data)
+        expect(cargos).toEqual(mockCargos.data.data)
         expect(fetchState).toEqual(FetchState.SUCCESS)
+
     })
 
 });

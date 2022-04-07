@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { FetchState, IDriverData, } from "../interfaces";
+import { FetchState, IDriverData, } from "../../interfaces";
 import axios from  "axios"
+import { getToken } from "../utils";
 
 export function useFetchDrivers(){
     const [fetchState, setFetchState] = useState(FetchState.DEFAULT)
@@ -11,7 +12,9 @@ export function useFetchDrivers(){
         try {
             setFetchState(FetchState.LOADING)
 
-            const res = await axios.get(`${url}/drivers`)
+            const res = await axios.get(`${url}/drivers`, {headers: {
+                Authorization: 'Bearer ' + getToken()
+              }})
             const data = res.data.data as IDriverData[];
 
             setDrivers(data)

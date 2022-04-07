@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { FetchState, ITransportData } from "../interfaces";
+import { FetchState, ITransportData } from "../../interfaces";
 import axios from  "axios"
+import { getToken } from "../utils";
 
 export function useFetchTransports(){
     const [fetchState, setFetchState] = useState(FetchState.DEFAULT)
@@ -11,7 +12,9 @@ export function useFetchTransports(){
         try {
             setFetchState(FetchState.LOADING)
 
-            const res = await axios.get(`${url}/transports`)
+            const res = await axios.get(`${url}/transports`, {headers: {
+                Authorization: 'Bearer ' + getToken()
+              }})
             const data = res.data.data as ITransportData[];
             setTransports(data)
             setFetchState(FetchState.SUCCESS)

@@ -1,8 +1,8 @@
 import {useFetchTransports} from "./fetch-transports"
 import {renderHook, act} from '@testing-library/react-hooks'
-import { FetchState } from "../interfaces";
+import { FetchState } from "../../interfaces";
 import axios from "axios";
-import { API_URL } from "../global-vars";
+import { API_URL } from "../../global-vars";
 import faker from 'faker'
 
 

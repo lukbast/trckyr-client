@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { FetchState, ICargoData } from "../interfaces";
+import { FetchState, ICargoData } from "../../interfaces";
 import axios from  "axios"
+import { getToken } from "../utils";
 
 export function useFetchCargos(){
     const [fetchState, setFetchState] = useState(FetchState.DEFAULT)
@@ -10,10 +11,10 @@ export function useFetchCargos(){
         const url = "http://localhost:8000"
         try {
             setFetchState(FetchState.LOADING)
-
-            const res = await axios.get(`${url}/cargos`)
+            const res = await axios.get(`${url}/cargos`, {headers: {
+                Authorization: 'Bearer ' + getToken()
+              }})
             const data = res.data.data as ICargoData[];
-            console.log(data)
             setCargos(data)
             setFetchState(FetchState.SUCCESS)
         } catch {
