@@ -1,25 +1,27 @@
-import { FC, useState } from "react"
+import { FC, useEffect, useState } from "react"
 import { ActionTypes, useDriverDataContext } from "../../context/driver-data-context"
-import { IDriverData } from "../../interfaces"
+import { FetchState, IDriverData, IDriverForm } from "../../interfaces"
+import { useNewDriver } from "../../requests/fetch-drivers/new-driver"
 import DriverForm from "../driver-form/driver-form"
 
 const NewDriverForm:FC = ():JSX.Element =>{
     const driverDataContext = useDriverDataContext()
-
-    const defaultState:IDriverData = {
-        _id: driverDataContext.state.length,
+    const [newData, fetchState, newDriver] = useNewDriver()
+    const defaultState:IDriverForm = {
         firstname: "",
         lastname: "",
         phone: "",
         email: "",
-        addedby: "TEST ACCOUNT",
-        added: "23/05/2021",
-        lastmodified: "30/02/2022",
-        modifiedby: "asdaf" 
     }
 
-    const [state, setState] = useState<IDriverData>(defaultState)
+    const [state, setState] = useState<IDriverForm>(defaultState)
     
+    useEffect(()=>{
+        if (newData.length > 0 && fetchState === FetchState.SUCCESS){
+            driverDataContext.dispatch({type: ActionTypes.FETCH_DATA, payload:newData[0], tempPayload:newData} )
+        }
+
+    },[newData, fetchState])
 
     const onChange = (e: React.ChangeEvent<HTMLInputElement>) =>{
         setState({...state,
@@ -28,13 +30,11 @@ const NewDriverForm:FC = ():JSX.Element =>{
     }
 
     const submit = () =>{
-        driverDataContext.dispatch({type: ActionTypes.ADD_DRIVER, payload:state})
-        setState({...state,
-        _id: state._id + 1})
+        newDriver(state)
     }
 
 
-    return(<DriverForm onChange={onChange} submitFunction={submit} buttonText="Add driver" data={state} />)
+    return(<DriverForm onChange={onChange} submitFunction={submit} buttonText="Add driver" data={state as IDriverData} />)
 
 }
 

@@ -29,6 +29,15 @@ export interface ICargoData{
     modifiedby: string,
 }
 
+export interface ICargoForm{
+    name: string,
+    weight: string,
+    weightunit: string,
+    quantity: string,
+    quantityunit: string,
+    info: string,
+}
+
 export interface IDriverData{
     _id: number,
     firstname: string,
@@ -39,6 +48,13 @@ export interface IDriverData{
     added: string,
     lastmodified: string,
     modifiedby: string
+}
+
+export interface IDriverForm{
+    firstname: string,
+    lastname: string,
+    phone: string,
+    email: string,
 }
 
 

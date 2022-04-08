@@ -14,8 +14,8 @@ interface IProps {
 const DriverForm:FC<IProps> = ({onChange, submitFunction, buttonText, data}):JSX.Element =>{
     return(
         <div className="driver-form">
-            <Input value={data.firstname} name="firstName" type="text" labelText="First name" length="long" onChange={onChange} />
-            <Input value={data.lastname} name="lastName" type="text" labelText="Last name" length="long" onChange={onChange} />
+            <Input value={data.firstname} name="firstname" type="text" labelText="First name" length="long" onChange={onChange} />
+            <Input value={data.lastname} name="lastname" type="text" labelText="Last name" length="long" onChange={onChange} />
             <Input value={data.phone} name="phone" type="text" labelText="Phone" length="long" onChange={onChange} />
             <Input value={data.email} name="email" type="text" labelText="email" length="long" onChange={onChange} />
             <div className="button-div">

@@ -55,7 +55,6 @@ const CargoList:FC =  ():JSX.Element =>{
   const renderSortedItems = ():JSX.Element[] => {
     const sortedData = sortItems()
     const renderedList:JSX.Element[] = sortedData.map( (data) => {return renderItem(data, data._id)})
-    console.log(renderItem)
     return( renderedList)
   }
 
