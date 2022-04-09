@@ -9,7 +9,6 @@ type State = typeof defaultState
 
 export enum ActionTypes {
     "FETCH_DATA",
-    "ADD_DRIVER",
     "EDIT_DRIVER",
     "DELETE_DRIVER"
 }
@@ -35,11 +34,6 @@ function cargoReducer (state: State, action: IAction):State {
     switch (action.type){
         case ActionTypes.FETCH_DATA:
             return action.tempPayload as IDriverData[]
-        case ActionTypes.ADD_DRIVER:
-            const tempData = [...state]
-            tempData.push(action.payload)
-            console.log(tempData)
-            return tempData
         case ActionTypes.EDIT_DRIVER:
             const tempState = state
             tempState[action.payload._id] = action.payload

@@ -8,7 +8,6 @@ export type State  = typeof defaultState
 
 export enum ActionTypes {
     "FETCH_DATA",
-    "ADD_CARGO",
     "DELETE_CARGO",
     "EDIT_CARGO"
 }
@@ -36,10 +35,6 @@ function cargoReducer (state: State, action: IAction):State {
     switch (action.type){
         case ActionTypes.FETCH_DATA:
             return  action.tempPayload as ICargoData[]
-        case ActionTypes.ADD_CARGO:
-            const newData = state
-            newData.push(action.payload)
-            return(newData)
         case ActionTypes.DELETE_CARGO:
             const cleanedData = removeData(action.payload._id, state)
             return(cleanedData)
