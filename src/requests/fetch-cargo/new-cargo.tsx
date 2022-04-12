@@ -15,16 +15,15 @@ export function useNewCargo(){
             setState(FetchState.LOADING)
             const res:ICargoData[] = await (await axios.post(`${url}/cargos`, new URLSearchParams({
                 ...payload
-            }), getAuthHeader())).data.data
+            }), getAuthHeader())).data.data as ICargoData[]
 
             
 
-            setError("")
             setData(res)
             setState(FetchState.SUCCESS)
         } catch (e){
-            setState(FetchState.ERROR)
             setError(e as string)
+            setState(FetchState.ERROR)
         }
     }
     return [data, state, newCargo, error] as const;

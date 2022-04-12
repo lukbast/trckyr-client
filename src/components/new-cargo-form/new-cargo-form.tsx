@@ -1,13 +1,13 @@
 import { FC, useEffect, useState } from "react"
-import { ActionTypes, useCargoDataContext } from "../../context/cargo-data-context"
-import { FetchState, ICargoData, ICargoForm } from "../../interfaces"
+import { ActionTypes, useDataContext } from "../../context/data-context"
+import { FetchState, ICargoForm } from "../../interfaces"
 import { useNewCargo } from "../../requests/fetch-cargo/new-cargo"
 import CargoForm from "../cargo-form/cargo-form"
 
 
 const NewCargoForm:FC = ():JSX.Element =>{
-    const cargoContext  = useCargoDataContext()
-    const [data, fetchState, getNewCargo, errror]  = useNewCargo()
+    const dataContext = useDataContext()
+    const [newData, fetchState, newCargo, errror]  = useNewCargo()
 
     const defaultState:ICargoForm = {
         name: "",
@@ -22,21 +22,20 @@ const NewCargoForm:FC = ():JSX.Element =>{
     const [state, setState] = useState<ICargoForm>(defaultState)
 
     useEffect(() =>{
-        console.log("IM CALLED")
-        if (data.length > 0 && fetchState === FetchState.SUCCESS){
-            console.log(data)
-            cargoContext.dispatch({type:ActionTypes.FETCH_DATA, payload:data[0], tempPayload: data})
+        if (newData.length > 0 && fetchState === FetchState.SUCCESS){
+            dataContext.dispatch({type:ActionTypes.FETCH_CARGOS, payload:{transport:[], drivers: [], cargo: newData}})
         }
-    }, [data])
+    }, [newData, fetchState])
 
     const onChange = (e: React.ChangeEvent<HTMLInputElement>) =>{
+        console.log(e.target.value)
         setState({...state,
             [e.target.name]: e.target.value 
         })
     }
 
     const submit = () =>{
-        getNewCargo(state)
+        newCargo(state)
     }
 
     return(

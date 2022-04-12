@@ -1,10 +1,9 @@
 import "./transport-form.scss"
 import { FC} from "react"
-import { useCargoDataContext } from "../../context/cargo-data-context"
-import { useDriverDataContext } from "../../context/driver-data-context"
 import { ITransportFormState} from "../../interfaces"
 import Button from "../button/button"
 import Input from "../input/input"
+import { useDataContext } from "../../context/data-context"
 
 
 interface IProps{
@@ -17,9 +16,7 @@ interface IProps{
 
 const TransportForm:FC<IProps> = ({data, onChange, submitFunction, handleSelectChange, buttonText}) =>{
 
-
-    const driversDataContex = useDriverDataContext()
-    const cargoDataContex = useCargoDataContext()
+    const dataContext = useDataContext()
 
     const createDriversOptions = (data:any):any[] =>{
         const optionsList: any[] = []
@@ -41,11 +38,11 @@ const TransportForm:FC<IProps> = ({data, onChange, submitFunction, handleSelectC
     function renderSelectInput (nameOfField: "drivers" | "cargo", onChange: any):JSX.Element{
         let options = []
         if (nameOfField === "drivers"){
-            const data = driversDataContex.state
+            const data = dataContext.state.drivers
             options = createDriversOptions(data)
         }
         if (nameOfField === "cargo"){
-            const data = cargoDataContex.state
+            const data = dataContext.state.cargo
             options = createCargoOptions(data)
         }
         

@@ -1,6 +1,6 @@
 import { FC, useState } from "react"
-import { useCargoDataContext } from "../../context/cargo-data-context"
 import { useCargoWindowContext, ActionTypes as WindowActionTypes } from "../../context/cargo-window-context"
+import { useDataContext } from "../../context/data-context"
 import { ICargoData } from "../../interfaces"
 import "./cargo-list.scss"
 import { quickSort } from "./quicksort"
@@ -12,8 +12,8 @@ const CargoList:FC =  ():JSX.Element =>{
     columnName: "id" | "name",
     descending: boolean
   }
+  const dataContext = useDataContext()
 
-  const cargoDataContext = useCargoDataContext()
   const cargoWindowContext = useCargoWindowContext()
   const [orderingState, setOrderingState] = useState<IState>({columnName: "id", descending:false})
 
@@ -22,9 +22,8 @@ const CargoList:FC =  ():JSX.Element =>{
     cargoWindowContext.dispatch({type:WindowActionTypes.SHOW_SELECTED, payload: id - 1})
   }
 
-
   const sortItems = () =>{
-    const data = cargoDataContext.state
+    const data = dataContext.state.cargo
     let listOfElements:ICargoData[] = []
     switch(orderingState.columnName){
       case "id":

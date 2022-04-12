@@ -1,5 +1,5 @@
 import { FC } from "react"
-import {ActionTypes as DataActions,  useDriverDataContext } from "../../context/driver-data-context"
+import { ActionTypes, useDataContext } from "../../context/data-context"
 import { ActionTypes as WindowActions, useDriversWindowContext } from "../../context/drivers-window-context"
 import Button from "../button/button"
 import "./driver-preview.scss"
@@ -8,11 +8,11 @@ import "./driver-preview.scss"
 const DriverPreview:FC = ():JSX.Element =>{
 
     const windowContext = useDriversWindowContext()
-    const dataContext = useDriverDataContext()
+    const dataContext = useDataContext()
 
     const renderDriverDetails = ():JSX.Element =>{
         const i = windowContext.state.selected
-        const data = dataContext.state[i]
+        const data = dataContext.state.drivers[i]
 
         return (
             <div className="section details">
@@ -29,9 +29,7 @@ const DriverPreview:FC = ():JSX.Element =>{
     )}
 
     const deleteItem = () =>{
-        const selected = windowContext.state.selected
-        windowContext.dispatch({type: WindowActions.SHOW_SELECTED, payload: 0})
-        dataContext.dispatch({type: DataActions.DELETE_DRIVER, payload: dataContext.state[selected]})
+        alert("IMPLEMENT THIS FEATURE!!!")
     }
 
     return (

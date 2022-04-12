@@ -1,11 +1,11 @@
 import { FC, useEffect, useState } from "react"
-import { ActionTypes, useDriverDataContext } from "../../context/driver-data-context"
+import { ActionTypes, useDataContext } from "../../context/data-context"
 import { FetchState, IDriverData, IDriverForm } from "../../interfaces"
 import { useNewDriver } from "../../requests/fetch-drivers/new-driver"
 import DriverForm from "../driver-form/driver-form"
 
 const NewDriverForm:FC = ():JSX.Element =>{
-    const driverDataContext = useDriverDataContext()
+    const dataContext = useDataContext()
     const [newData, fetchState, newDriver] = useNewDriver()
     const defaultState:IDriverForm = {
         firstname: "",
@@ -18,7 +18,7 @@ const NewDriverForm:FC = ():JSX.Element =>{
     
     useEffect(()=>{
         if (newData.length > 0 && fetchState === FetchState.SUCCESS){
-            driverDataContext.dispatch({type: ActionTypes.FETCH_DATA, payload:newData[0], tempPayload:newData} )
+            dataContext.dispatch({type: ActionTypes.FETCH_DRIVERS, payload:{transport: [], cargo: [], drivers:newData}} )
         }
 
     },[newData, fetchState])

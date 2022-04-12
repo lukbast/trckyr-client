@@ -1,18 +1,19 @@
 import { FC, useState } from "react"
+import { useDataContext } from "../../context/data-context"
 import { useSelectedTransport } from "../../context/selected-transport-context"
-import { ActionTypes, useTransportDataContext, statusesPlaceholder } from "../../context/transport-data-context"
 import { useWindowState } from "../../context/window-context"
 import { ITransportData } from "../../interfaces"
 import TransportForm from "../transport-form/transport-form"
 
 const NewTransportForm:FC = ():JSX.Element =>{
 
-    const transportDataContext = useTransportDataContext()
     const selectedTransportContext = useSelectedTransport()
     const windowContex = useWindowState()
 
+    const dataContext = useDataContext()
+
     const defaultState:ITransportData = {
-        _id: transportDataContext.state.length, 
+        _id: dataContext.state.transport.length, 
         name: "",
         from_: "",
         to_: "",
@@ -24,7 +25,7 @@ const NewTransportForm:FC = ():JSX.Element =>{
         added: "23/05/2021",
         lastmodified: "30/02/2022",
         modifiedby: "30/02/2022",
-        statuses: statusesPlaceholder
+        statuses: []
     } 
     const [state, setState] =  useState(defaultState)
 
@@ -54,9 +55,7 @@ const NewTransportForm:FC = ():JSX.Element =>{
     }
 
     const submit = ()=>{
-        transportDataContext.dispatch({type: ActionTypes.ADD_TRANSPORT, payload:state})
-        selectedTransportContext.dispatch(transportDataContext.state.length)
-        windowContex.dispatch("openTransport")
+        alert("IMPLEMENT NEW TRANSPORT")
     }
 
     return (<TransportForm buttonText="Add transport" data={state} onChange={onChange} submitFunction={submit} handleSelectChange={handleSelectChange}/>)

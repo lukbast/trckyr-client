@@ -1,19 +1,18 @@
 import { FC, useEffect, useState } from "react"
 import CargoForm from "../cargo-form/cargo-form"
-import { useCargoDataContext, ActionTypes as DataActions } from "../../context/cargo-data-context"
 import { ActionTypes as WindowActions, useCargoWindowContext } from "../../context/cargo-window-context"
 import { FetchState, ICargoForm } from "../../interfaces"
 import { useEditCargo } from "../../requests/fetch-cargo/edit-cargo"
+import { ActionTypes, useDataContext } from "../../context/data-context"
 
 
 const EditCargoForm:FC = ():JSX.Element => {
 
-
-    const cargoDataContext  = useCargoDataContext()
+    const dataContext = useDataContext()
     const cargoWindowContext = useCargoWindowContext()
     const [newData, fetchState, editCargo, error] = useEditCargo()
 
-    const [state, setState] = useState(cargoDataContext.state[cargoWindowContext.state.selected])
+    const [state, setState] = useState(dataContext.state.drivers[cargoWindowContext.state.selected])
 
     const onChange = (e: React.ChangeEvent<HTMLInputElement>) =>{
         setState({...state,
@@ -23,7 +22,7 @@ const EditCargoForm:FC = ():JSX.Element => {
 
     useEffect(()=> {
         if (newData.length != 0 && fetchState === FetchState.SUCCESS){
-            cargoDataContext.dispatch({type: DataActions.FETCH_DATA, payload: state, tempPayload:newData})
+            dataContext.dispatch({type: ActionTypes.FETCH_CARGOS, payload:{transport: [], drivers: [], cargo:newData}})
             cargoWindowContext.dispatch({type: WindowActions.SHOW_SELECTED, payload: state._id})
         }
     },[newData.length])

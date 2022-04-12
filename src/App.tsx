@@ -2,10 +2,8 @@ import { useState, useEffect } from 'react';
 import './App.scss';
 import LoginPage from './components/login-page/login-page';
 import MainWindow from './components/main-window/main-window';
+import { ActionTypes, useDataContext } from './context/data-context';
 
-import { useCargoDataContext, ActionTypes as CargoActions } from "./context/cargo-data-context"
-import { useDriverDataContext, ActionTypes as DriverActions  } from "./context/driver-data-context"
-import { useTransportDataContext, ActionTypes as TransportActions } from './context/transport-data-context';
 import { UserActions, useUser } from './context/user-context/user-context';
 
 import { FetchState } from "./interfaces"
@@ -21,20 +19,16 @@ function App():JSX.Element {
 
   const user =  useUser().state; const dispatchUser = useUser().dispatch
 
-  const cargoDataContext = useCargoDataContext()
-  const driversDataContext = useDriverDataContext()
-  const transportsDataContext = useTransportDataContext()
+  const dataContext = useDataContext()
 
-  const [cargos, cargosFetchStatus, getCargos] = useFetchCargos()
-  const [drivers, driversFetchStatus, getDrivers] = useFetchDrivers()
-  const [transports, transportsFetchStatus, getTransports] = useFetchTransports()
+  const [cargos, cargosStatus, getCargos] = useFetchCargos()
+  const [drivers, driversStatus, getDrivers] = useFetchDrivers()
+  const [transports, transportsStatus, getTransports] = useFetchTransports()
 
   const [loginState, getUser, loginError] = useLogin()
   const [sesssionState, getSesssion, sesssionError] = useSession()
+  const [dataFetched, setDataFetched] = useState<boolean>(false)
 
-  const [cargoFetched, setCargoFetched] = useState<boolean>(false)
-  const [driversFetched, setDriversFetched] = useState<boolean>(false)
-  const [transportsFetched, setTransportsFetched] = useState<boolean>(false)
 
   // HANDLE LOGING USER IN
   const logIn = (uname:string, psswd:string) => {
@@ -56,38 +50,20 @@ function App():JSX.Element {
 
   // FETCHING CARGO DATA
   useEffect(() =>{
-      if (!cargoFetched && user.loggedIn) {
-          getCargos()
-          setCargoFetched(true)
-      }
-      if (cargosFetchStatus === FetchState.SUCCESS){
-          cargoDataContext.dispatch({type:CargoActions.FETCH_DATA, payload:cargos[0], tempPayload:cargos})
-      }
+    if (!dataFetched && user.loggedIn) {
+        getCargos()
+        getDrivers()
+        getTransports()
+        setDataFetched(true)
+    }
+    if (cargosStatus === FetchState.SUCCESS,driversStatus === FetchState.SUCCESS,
+        transportsStatus === FetchState.SUCCESS){
+      dataContext.dispatch(
+        {type:ActionTypes.FETCH_DATA, payload:{ transport: transports, cargo: cargos, drivers: drivers }
+      })
+    }
 
-  },[cargoFetched, cargosFetchStatus, user])
-
-  // FETCHING DRIVERS DATA
-  useEffect(() =>{
-      if (!driversFetched && user.loggedIn) {
-          getDrivers()
-          setDriversFetched(true)
-      }
-      if (cargosFetchStatus === FetchState.SUCCESS){
-          driversDataContext.dispatch({type:DriverActions.FETCH_DATA, payload:drivers[0], tempPayload:drivers})
-      }
-
-  },[driversFetched, driversFetchStatus, user.loggedIn])
-
-   // FETCHING TRANSPORTS DATA
-   useEffect(() =>{
-        if (!transportsFetched && user.loggedIn) {
-            getTransports()
-            setTransportsFetched(true)
-        }
-        if (transportsFetchStatus === FetchState.SUCCESS){
-            transportsDataContext.dispatch({type:TransportActions.FETCH_TRANSPORTS, payload:transports[0], tempPayload:transports})
-        }
-    },[transportsFetched, transportsFetchStatus, user.loggedIn])
+  },[dataFetched, cargosStatus,transportsStatus, driversStatus, user])
 
   const logOut = () => {
     logoutReq()
@@ -99,9 +75,9 @@ function App():JSX.Element {
   return (
       <>
       {
-        cargoDataContext.state.length !== 0 &&
-        driversDataContext.state.length !== 0 &&
-        transportsDataContext.state.length !== 0 &&
+        dataContext.state.transport.length !== 0 &&
+        dataContext.state.cargo.length !== 0 &&
+        dataContext.state.drivers.length !== 0 &&
         user.loggedIn ?
         <MainWindow logOut={logOut} user={user}/>:
         <LoginPage

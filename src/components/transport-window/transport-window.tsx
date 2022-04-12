@@ -1,10 +1,8 @@
 import { FC } from "react"
-import { useCargoDataContext } from "../../context/cargo-data-context"
-import { useDriverDataContext } from "../../context/driver-data-context"
+import { useDataContext } from "../../context/data-context"
 import { useSelectedTransport } from "../../context/selected-transport-context"
-import { ActionTypes, useTransportDataContext, } from "../../context/transport-data-context"
 import {  useWindowState } from "../../context/window-context"
-import { ITransportData, ITransportStatus, states } from "../../interfaces"
+import { ITransportData, ITransportStatus } from "../../interfaces"
 import Button from "../button/button"
 import EditTransportForm from "../edit-transport-form/edit-transport-form"
 import "./transport-window.scss"
@@ -15,26 +13,17 @@ interface IProps {
 
 const TransportWindow:FC<IProps> = ({data}):JSX.Element =>{
 
-    const cargoDataContext = useCargoDataContext()
-    const driversDataContext = useDriverDataContext()
+
     const windowContext = useWindowState()
-    const transportDataContext = useTransportDataContext()
     const selectedTransportContext = useSelectedTransport()
+    const dataContext = useDataContext()
 
     const displayEditTransportForm = () =>{
         windowContext.dispatch("openEditTransport")
     }
 
-    const deleteTransport = () =>{
-        const i = selectedTransportContext.state.index
-        selectedTransportContext.dispatch(0)
-        transportDataContext.dispatch({type: ActionTypes.DELETE_TRANSPORT, payload: transportDataContext.state[i]})
-
-        windowContext.dispatch("openTransport")
-
-    }
     const renderCargo = () => {
-        const cargo = cargoDataContext.state[data.cargo - 1]
+        const cargo = dataContext.state.cargo[data.cargo - 1]
         
         return(
             <div className="table cargo hide-srollbars" >
@@ -57,7 +46,7 @@ const TransportWindow:FC<IProps> = ({data}):JSX.Element =>{
     }
 
     const renderDrivers = () => {
-        const drivers = data.drivers.map( (id) => driversDataContext.state[id])
+        const drivers = data.drivers.map( (id) => dataContext.state.drivers[id])
         const rows = []
         for (let i = 0; i< drivers.length; i++){
             rows.push(<div className="row">
@@ -113,13 +102,13 @@ const TransportWindow:FC<IProps> = ({data}):JSX.Element =>{
     const renderTransportWindow = ():JSX.Element =>{
         let isData:boolean = false
         const lastStatusIndex:number = data.statuses.length - 1
-        if(transportDataContext.state.length > 0) isData = true
+        if(dataContext.state.transport.length > 0) isData = true
         if (!isData) windowContext.dispatch("openNewTransport")
         if (windowContext.state.transportWindow){
             return (isData? <div className="transport-window hide-srollbars">
                 <div className="section buttons-section">
                     <Button text="edit transport" onClick={displayEditTransportForm}/>
-                    <Button text="Delete transport" onClick={deleteTransport}/>
+                    <Button text="Delete transport" onClick={() => {alert("IMPLEMENT DELETION")}}/>
                 </div>
                 <div className="section details">
                     <div className="row"><b>Name:</b> <span>{data.name}</span></div>

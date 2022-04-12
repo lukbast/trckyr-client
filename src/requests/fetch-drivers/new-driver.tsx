@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { FetchState, IDriverData, IDriverForm, } from "../../interfaces";
+import { FetchState, IDriverData, IDriverForm } from "../../interfaces";
 import axios from  "axios"
 import { getAuthHeader } from "../utils";
 
@@ -15,9 +15,10 @@ export function useNewDriver(){
                 ...payload
             }) ,getAuthHeader())
             const data = res.data.data as IDriverData[];
+
             setDrivers(data)
             setFetchState(FetchState.SUCCESS)
-        } catch {
+        } catch (e) {
             setFetchState(FetchState.ERROR)
         }
     }

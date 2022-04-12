@@ -1,17 +1,17 @@
 import { FC, useState } from "react"
+import { useDataContext } from "../../context/data-context"
 import { useSelectedTransport } from "../../context/selected-transport-context"
-import { ActionTypes, useTransportDataContext } from "../../context/transport-data-context"
 import { useWindowState } from "../../context/window-context"
 import { ITransportFormState } from "../../interfaces"
 import TransportForm from "../transport-form/transport-form"
 
 const EditTransportForm:FC = ():JSX.Element =>{
 
-    const transportDataContext = useTransportDataContext()
+    const dataContext = useDataContext()
     const selectedTransportContext = useSelectedTransport()
     const windowContext = useWindowState()
 
-    let toEdit = transportDataContext.state[selectedTransportContext.state.index]
+    let toEdit = dataContext.state.transport[selectedTransportContext.state.index]
 
     const defaultState:ITransportFormState = {name:toEdit.name, 
         to_: toEdit.to_, 
@@ -47,9 +47,7 @@ const EditTransportForm:FC = ():JSX.Element =>{
     }
 
     const submit = ()=>{
-        toEdit = {...toEdit, ...state}
-        transportDataContext.dispatch({type: ActionTypes.EDIT_TRANSPORT, payload:toEdit})
-        windowContext.dispatch("openTransport")
+        alert("IMPLEMENT EDIT TRANSPORT")
     }
 
     return (<TransportForm buttonText="Edit transport" data={state} onChange={onChange} submitFunction={submit} handleSelectChange={handleSelectChange}/>)

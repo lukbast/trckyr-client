@@ -1,5 +1,5 @@
-import { ActionTypes as DataActions, useCargoDataContext } from "../../context/cargo-data-context"
 import { ActionTypes as WindowActions, useCargoWindowContext } from "../../context/cargo-window-context"
+import { useDataContext } from "../../context/data-context"
 import Button from "../button/button"
 import "./cargo-preview.scss"
 
@@ -7,10 +7,10 @@ import "./cargo-preview.scss"
 const CargoPreview = ():JSX.Element => {
     
     const windowContext = useCargoWindowContext()
-    const dataContext = useCargoDataContext()
+    const dataContext = useDataContext()
     const renderCargoDetails = ():JSX.Element =>{
         const i = windowContext.state.selected
-        const data = dataContext.state[i]
+        const data = dataContext.state.cargo[i]
         return(
             <div className="section details">
                 <div className="row"><b>ID:</b> {data._id} </div>
@@ -27,9 +27,7 @@ const CargoPreview = ():JSX.Element => {
     }
 
     const deleteItem = () =>{
-        const selected = windowContext.state.selected
-        windowContext.dispatch({type: WindowActions.SHOW_SELECTED, payload: 0})
-        dataContext.dispatch({type: DataActions.DELETE_CARGO, payload: dataContext.state[selected]})
+        alert("IMPLEMENT THIS!!!")
     }
 
     return(

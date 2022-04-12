@@ -1,8 +1,8 @@
 import { FC, useState } from "react"
-import { useDriverDataContext } from "../../context/driver-data-context"
 import { IDriverData } from "../../interfaces"
 import {quickSort} from "./quicksort"
 import { ActionTypes as WindowActions, useDriversWindowContext } from "../../context/drivers-window-context"
+import { useDataContext } from "../../context/data-context"
 
 interface IState {
     columnName: "id" | "firstName"| "lastName",
@@ -10,8 +10,7 @@ interface IState {
   }
 
 const DriversList:FC = ():JSX.Element =>{
-
-    const driverDataContext = useDriverDataContext()
+    const dataContext = useDataContext()
     const driversWindowContext = useDriversWindowContext()
     const [orderingState, setOrderingState] = useState<IState>({columnName: "id", descending:false})
 
@@ -20,7 +19,7 @@ const DriversList:FC = ():JSX.Element =>{
     }
 
     const sortItems = () =>{
-        const data = driverDataContext.state
+      const data = dataContext.state.drivers
         let listOfElements:IDriverData[] = []
         switch(orderingState.columnName){
           case "id":

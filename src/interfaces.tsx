@@ -1,3 +1,5 @@
+
+
 export interface ITransportData {
     _id: number,
     name: string,
@@ -57,6 +59,11 @@ export interface IDriverForm{
     email: string,
 }
 
+export interface IData {
+    transport: ITransportData[],
+    cargo : ICargoData[],
+    drivers: IDriverData[]
+}
 
 export interface ITransportFormState{
     name: string
@@ -66,13 +73,11 @@ export interface ITransportFormState{
     cargo: number
 } 
 
-export enum states {"Waiting for dispatch", "Moving", "Taking a short break", "Break to sleep",
- "Stuck in the traffic jam", "Malfunction of the vehicle" }
 
 export interface ITransportStatus {
     _id: number,
     transportid: number,
-    state: states,
+    state: string,
     begginingofstate: string,
     endofstate: string,
     duration: string,

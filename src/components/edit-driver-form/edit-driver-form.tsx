@@ -1,15 +1,15 @@
 import { FC, useEffect, useState } from "react"
-import { ActionTypes as DataActions, useDriverDataContext } from "../../context/driver-data-context"
+import { ActionTypes, useDataContext } from "../../context/data-context"
 import {ActionTypes as WindowActions, useDriversWindowContext } from "../../context/drivers-window-context"
 import { FetchState, IDriverData, IDriverForm } from "../../interfaces"
 import { useEditDriver } from "../../requests/fetch-drivers/edit-drivers"
 import DriverForm from "../driver-form/driver-form"
 
 const EditDriverForm:FC = ():JSX.Element =>{
-    const driverDataContext = useDriverDataContext()
+    const dataContext = useDataContext()
     const windowContext = useDriversWindowContext()
 
-    const [state, setState] = useState<IDriverData>(driverDataContext.state[windowContext.state.selected])
+    const [state, setState] = useState<IDriverData>(dataContext.state.drivers[windowContext.state.selected])
     
     const [newDrivers, fetchState, editDriver] = useEditDriver()
 
@@ -21,7 +21,7 @@ const EditDriverForm:FC = ():JSX.Element =>{
 
     useEffect(() =>{
         if (newDrivers.length != 0 && fetchState == FetchState.SUCCESS){
-            driverDataContext.dispatch({type: DataActions.FETCH_DATA, payload:state, tempPayload: newDrivers})
+            dataContext.dispatch({type: ActionTypes.FETCH_DRIVERS, payload:{transport:[], cargo:[], drivers: newDrivers}})
             windowContext.dispatch({type: WindowActions.SHOW_SELECTED, payload: state._id})
         }
     }, [newDrivers.length])
