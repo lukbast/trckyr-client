@@ -9,7 +9,8 @@ const EditDriverForm:FC = ():JSX.Element =>{
     const dataContext = useDataContext()
     const windowContext = useDriversWindowContext()
 
-    const [state, setState] = useState<IDriverData>(dataContext.state.drivers[windowContext.state.selected])
+    const [state, setState] = useState<IDriverData>(dataContext.state.drivers.
+        filter((entry) =>{ return entry._id === windowContext.state.selected})[0])
     
     const [newDrivers, fetchState, editDriver] = useEditDriver()
 

@@ -20,9 +20,9 @@ export interface ITransportData {
 export interface ICargoData{
     _id: number,
     name: string,
-    weight: number,
+    weight: string,
     weightunit: string,
-    quantity: number,
+    quantity: string,
     quantityunit: string,
     info: string,
     addedby: string,

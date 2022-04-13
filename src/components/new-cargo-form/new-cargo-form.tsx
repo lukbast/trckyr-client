@@ -1,4 +1,5 @@
 import { FC, useEffect, useState } from "react"
+import { useCargoWindowContext } from "../../context/cargo-window-context"
 import { ActionTypes, useDataContext } from "../../context/data-context"
 import { FetchState, ICargoForm } from "../../interfaces"
 import { useNewCargo } from "../../requests/fetch-cargo/new-cargo"
@@ -7,7 +8,8 @@ import CargoForm from "../cargo-form/cargo-form"
 
 const NewCargoForm:FC = ():JSX.Element =>{
     const dataContext = useDataContext()
-    const [newData, fetchState, newCargo, errror]  = useNewCargo()
+    const windowContext = useCargoWindowContext()
+    const [newData, fetchState, newCargo, error]  = useNewCargo()
 
     const defaultState:ICargoForm = {
         name: "",

@@ -12,7 +12,6 @@ interface IProps {
 
 
 const CargoForm:FC<IProps> = ({onChange, submitFunction, buttonText, data}) => {
-
     return(
         <div className="driver-form">
             <Input type="text" name="name" value={data? data.name: ""} onChange={onChange} labelText="Name" length="long"/>
