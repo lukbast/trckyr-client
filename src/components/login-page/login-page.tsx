@@ -17,10 +17,9 @@ interface IState{
 interface IProps{
     loginIn: any
     loginError: string
-    sessionError: string,
 }
 
-const LoginPage:React.FC<IProps> = ({loginIn, loginError, sessionError}):JSX.Element =>{
+const LoginPage:React.FC<IProps> = ({loginIn, loginError}):JSX.Element =>{
 
     const [state, setState] = useState<IState["formData"]>({username:"", password:""})
 
@@ -36,9 +35,6 @@ const LoginPage:React.FC<IProps> = ({loginIn, loginError, sessionError}):JSX.Ele
     }
 
     const displayErrors = () =>{
-        if (sessionError){
-          return <p style={{'color': 'red'}} >Session has been expired</p>
-        }
         if (loginError){
           return <p style={{'color': 'red'}}>Username or passowrd is invalid</p>
         }

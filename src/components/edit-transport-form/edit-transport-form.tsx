@@ -2,7 +2,7 @@ import { FC, useState } from "react"
 import { useDataContext } from "../../context/data-context"
 import { useSelectedTransport } from "../../context/selected-transport-context"
 import { useWindowState } from "../../context/window-context"
-import { ITransportFormState } from "../../interfaces"
+import { ITransportForm } from "../../interfaces"
 import TransportForm from "../transport-form/transport-form"
 
 const EditTransportForm:FC = ():JSX.Element =>{
@@ -13,7 +13,7 @@ const EditTransportForm:FC = ():JSX.Element =>{
 
     let toEdit = dataContext.state.transport[selectedTransportContext.state.index]
 
-    const defaultState:ITransportFormState = {name:toEdit.name, 
+    const defaultState:ITransportForm = {name:toEdit.name, 
         to_: toEdit.to_, 
         from_:toEdit.from_, 
         drivers: toEdit.drivers, 

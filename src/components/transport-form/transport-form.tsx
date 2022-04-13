@@ -1,13 +1,13 @@
 import "./transport-form.scss"
 import { FC} from "react"
-import { ITransportFormState} from "../../interfaces"
+import { ITransportForm} from "../../interfaces"
 import Button from "../button/button"
 import Input from "../input/input"
 import { useDataContext } from "../../context/data-context"
 
 
 interface IProps{
-    data: ITransportFormState,
+    data: ITransportForm,
     onChange: any,
     handleSelectChange: any,
     submitFunction: any,
@@ -61,8 +61,8 @@ const TransportForm:FC<IProps> = ({data, onChange, submitFunction, handleSelectC
         <div className="transport-form-container">
             <div className="driver-form transport-form">
                 <Input value={data.name} labelText="Name" type="text" length="long" name="name" onChange={onChange}/>
-                <Input value={data.from_} labelText="From" type="text" length="long" name="from" onChange={onChange}/>
-                <Input value={data.to_} labelText="To" type="text" length="long" name="to" onChange={onChange}/>
+                <Input value={data.from_} labelText="From" type="text" length="long" name="from_" onChange={onChange}/>
+                <Input value={data.to_} labelText="To" type="text" length="long" name="to_" onChange={onChange}/>
 
                 <Button text={buttonText} onClick={submitFunction}/>
                 

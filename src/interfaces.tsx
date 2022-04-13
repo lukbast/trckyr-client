@@ -1,21 +1,27 @@
 
 
 export interface ITransportData {
-    _id: number,
+    _id: string,
     name: string,
     from_: string,
     to_: string,
-    drivers: number[],
-    cargo: number,
-    total: number,
+    drivers: string[],
+    cargo: string,
+    total: string,
     state: string,
     addedby: string,
     added: string,
     lastmodified: string,
     modifiedby: string
     statuses: ITransportStatus[]
-
 }
+export interface ITransportForm{
+    name: string
+    from_: string,
+    to_: string,
+    drivers: string[]
+    cargo: string
+} 
 
 export interface ICargoData{
     _id: number,
@@ -64,14 +70,6 @@ export interface IData {
     cargo : ICargoData[],
     drivers: IDriverData[]
 }
-
-export interface ITransportFormState{
-    name: string
-    from_: string,
-    to_: string,
-    drivers: number[]
-    cargo: number
-} 
 
 
 export interface ITransportStatus {

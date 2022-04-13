@@ -1,41 +1,48 @@
-import { FC, useState } from "react"
-import { useDataContext } from "../../context/data-context"
+import { FC, useEffect, useState } from "react"
+import { ActionTypes, useDataContext } from "../../context/data-context"
 import { useSelectedTransport } from "../../context/selected-transport-context"
 import { useWindowState } from "../../context/window-context"
-import { ITransportData } from "../../interfaces"
+import { FetchState, ITransportForm } from "../../interfaces"
+import { useNewTransport } from "../../requests/fetch-transports/new-transport"
 import TransportForm from "../transport-form/transport-form"
 
 const NewTransportForm:FC = ():JSX.Element =>{
 
     const selectedTransportContext = useSelectedTransport()
     const windowContex = useWindowState()
-
     const dataContext = useDataContext()
+    const [newTransports, fetchState, newTransport] = useNewTransport()
 
-    const defaultState:ITransportData = {
-        _id: dataContext.state.transport.length, 
+    const defaultState:ITransportForm = {
         name: "",
         from_: "",
         to_: "",
-        drivers:[0],
-        cargo: 0,
-        total:123, 
-        state: "In progress", 
-        addedby: "TEST ACCOUNT",
-        added: "23/05/2021",
-        lastmodified: "30/02/2022",
-        modifiedby: "30/02/2022",
-        statuses: []
+        drivers:[],
+        cargo: "",
     } 
     const [state, setState] =  useState(defaultState)
 
-     function handleSelectChange(e:React.ChangeEvent<HTMLSelectElement>) {
+    useEffect(() => {
+      if (newTransports.length > 0 && fetchState === FetchState.SUCCESS){
+        dataContext.dispatch({type: ActionTypes.FETCH_TRANSPORTS, payload:{drivers: [], cargo: [], transport: newTransports}})
+        
+        
+        setTimeout(() =>{
+            selectedTransportContext.dispatch(0)
+            windowContex.dispatch("openTransport")
+        }, 800)
+        
+      }
+    }, [newTransports, fetchState])
+    
+
+    function handleSelectChange(e:React.ChangeEvent<HTMLSelectElement>) {
         const options = e.target.options;
         const value = [];
         const name = e.target.name
         for (var i = 0, l = options.length; i < l; i++) {
           if (options[i].selected) {
-            value.push(parseInt(options[i].value));
+            value.push(options[i].value);
           }
         }
         
@@ -44,18 +51,13 @@ const NewTransportForm:FC = ():JSX.Element =>{
     }
 
     function onChange(e: React.ChangeEvent<HTMLInputElement>){
-        const name = e.target.name
-        let value: string | number = e.target.value
-        if (name === "cargo"){ 
-            value = parseInt(value)
-        }
         setState({...state,
-            [name]: value 
+            [e.target.name]: e.target.value 
         })
     }
 
     const submit = ()=>{
-        alert("IMPLEMENT NEW TRANSPORT")
+        newTransport(state)
     }
 
     return (<TransportForm buttonText="Add transport" data={state} onChange={onChange} submitFunction={submit} handleSelectChange={handleSelectChange}/>)

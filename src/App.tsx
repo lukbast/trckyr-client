@@ -3,32 +3,22 @@ import './App.scss';
 import LoginPage from './components/login-page/login-page';
 import MainWindow from './components/main-window/main-window';
 import { ActionTypes, useDataContext } from './context/data-context';
-
 import { UserActions, useUser } from './context/user-context/user-context';
-
 import { FetchState } from "./interfaces"
-
 import { useFetchCargos } from "./requests/fetch-cargo/fetch-cargo"
 import { useFetchDrivers } from "./requests/fetch-drivers/fetch-drivers"
 import { useFetchTransports } from './requests/fetch-transports/fetch-transports';
 import { useLogin } from './requests/user-login/user-login';
-import { logoutReq } from './requests/user-login/user-logout';
-import { useSession } from './requests/user-login/user-session';
 
 function App():JSX.Element {
 
   const user =  useUser().state; const dispatchUser = useUser().dispatch
-
   const dataContext = useDataContext()
-
   const [cargos, cargosStatus, getCargos] = useFetchCargos()
   const [drivers, driversStatus, getDrivers] = useFetchDrivers()
   const [transports, transportsStatus, getTransports] = useFetchTransports()
-
   const [loginState, getUser, loginError] = useLogin()
-  const [sesssionState, getSesssion, sesssionError] = useSession()
   const [dataFetched, setDataFetched] = useState<boolean>(false)
-
 
   // HANDLE LOGING USER IN
   const logIn = (uname:string, psswd:string) => {
@@ -36,19 +26,13 @@ function App():JSX.Element {
   }
 
   useEffect(() =>{
-    if(localStorage.getItem("username") && localStorage.getItem("token")){
-        if(sesssionState === FetchState.DEFAULT){
-          getSesssion()
-        }
-    }
-
-    if (loginState === FetchState.SUCCESS || localStorage.getItem('username') && sesssionState === FetchState.SUCCESS) {
+    if (loginState === FetchState.SUCCESS || localStorage.getItem('username')) {
         dispatchUser({type:UserActions['LOG IN'] , payload: {username: localStorage.getItem('username') as string, loggedIn:true}})
     }
-  },[loginState, sesssionState])
+  },[loginState])
 
 
-  // FETCHING CARGO DATA
+  // FETCHING DATA
   useEffect(() =>{
     if (!dataFetched && user.loggedIn) {
         getCargos()
@@ -66,7 +50,6 @@ function App():JSX.Element {
   },[dataFetched, cargosStatus,transportsStatus, driversStatus, user])
 
   const logOut = () => {
-    logoutReq()
     localStorage.removeItem("token")
     localStorage.removeItem('username')
     dispatchUser({type:UserActions['LOG IN'] ,payload: {username: "", loggedIn: false}})
@@ -83,7 +66,6 @@ function App():JSX.Element {
         <LoginPage
           loginIn={logIn}
           loginError={loginError}
-          sessionError={sesssionError}
         />
       }</>
   )

@@ -23,7 +23,7 @@ const TransportWindow:FC<IProps> = ({data}):JSX.Element =>{
     }
 
     const renderCargo = () => {
-        const cargo = dataContext.state.cargo[data.cargo - 1]
+        const cargo = dataContext.state.cargo.filter((entry) => {return entry._id === parseInt(data.cargo)})[0]
         
         return(
             <div className="table cargo hide-srollbars" >
@@ -46,7 +46,7 @@ const TransportWindow:FC<IProps> = ({data}):JSX.Element =>{
     }
 
     const renderDrivers = () => {
-        const drivers = data.drivers.map( (id) => dataContext.state.drivers[id])
+        const drivers = data.drivers.map( (id) => dataContext.state.drivers[parseInt(id)])
         const rows = []
         for (let i = 0; i< drivers.length; i++){
             rows.push(<div className="row">
