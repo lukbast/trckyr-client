@@ -24,7 +24,7 @@ const EditDriverForm:FC = ():JSX.Element =>{
             dataContext.dispatch({type: ActionTypes.FETCH_DRIVERS, payload:{transport:[], cargo:[], drivers: newDrivers}})
             windowContext.dispatch({type: WindowActions.SHOW_SELECTED, payload: state._id})
         }
-    }, [newDrivers.length])
+    }, [newDrivers.length, fetchState])
 
     const submit = () =>{
         editDriver((state as unknown) as IDriverForm,state._id )

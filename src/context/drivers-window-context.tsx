@@ -4,7 +4,7 @@ const defaultState = {
     showSelected: true,
     showEdit: false,
     showNew: false,
-    selected: 0
+    selected: 1
 }
 
 export type State  = typeof defaultState

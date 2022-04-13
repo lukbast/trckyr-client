@@ -25,7 +25,7 @@ const EditCargoForm:FC = ():JSX.Element => {
             dataContext.dispatch({type: ActionTypes.FETCH_CARGOS, payload:{transport: [], drivers: [], cargo:newData}})
             cargoWindowContext.dispatch({type: WindowActions.SHOW_SELECTED, payload: state._id})
         }
-    },[newData.length])
+    },[newData.length, fetchState])
 
     const submit = () =>{
         editCargo((state as unknown) as ICargoForm, state._id)

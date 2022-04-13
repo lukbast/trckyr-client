@@ -1,6 +1,7 @@
 import { FC } from "react"
 import { ActionTypes, useDataContext } from "../../context/data-context"
 import { ActionTypes as WindowActions, useDriversWindowContext } from "../../context/drivers-window-context"
+import { IDriverData } from "../../interfaces"
 import Button from "../button/button"
 import "./driver-preview.scss"
 
@@ -11,8 +12,8 @@ const DriverPreview:FC = ():JSX.Element =>{
     const dataContext = useDataContext()
 
     const renderDriverDetails = ():JSX.Element =>{
-        const i = windowContext.state.selected
-        const data = dataContext.state.drivers[i]
+        const id = windowContext.state.selected
+        const data: IDriverData = dataContext.state.drivers.filter((entry => {return entry._id === id}))[0]
 
         return (
             <div className="section details">

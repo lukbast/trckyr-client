@@ -15,7 +15,7 @@ const DriversList:FC = ():JSX.Element =>{
     const [orderingState, setOrderingState] = useState<IState>({columnName: "id", descending:false})
 
     const onItemCLick = (id: number) => {
-      driversWindowContext.dispatch({type:WindowActions.SHOW_SELECTED, payload: id -1})
+      driversWindowContext.dispatch({type:WindowActions.SHOW_SELECTED, payload: id})
     }
 
     const sortItems = () =>{
@@ -42,7 +42,7 @@ const DriversList:FC = ():JSX.Element =>{
 
     const renderItem =  (data:IDriverData, key:number):JSX.Element =>{
         return(
-          <div className={driversWindowContext.state.selected === data._id -1 ? "row cols-3 selected": "row cols-3"} 
+          <div className={driversWindowContext.state.selected === data._id? "row cols-3 selected": "row cols-3"} 
           onClick={() =>{ onItemCLick(data._id)}} key={key}>
             <div className="field">{data._id}</div>
             <div className="field">{data.lastname}</div>

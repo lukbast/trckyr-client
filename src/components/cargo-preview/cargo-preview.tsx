@@ -1,5 +1,6 @@
 import { ActionTypes as WindowActions, useCargoWindowContext } from "../../context/cargo-window-context"
 import { useDataContext } from "../../context/data-context"
+import { ICargoData } from "../../interfaces"
 import Button from "../button/button"
 import "./cargo-preview.scss"
 
@@ -10,7 +11,7 @@ const CargoPreview = ():JSX.Element => {
     const dataContext = useDataContext()
     const renderCargoDetails = ():JSX.Element =>{
         const i = windowContext.state.selected
-        const data = dataContext.state.cargo[i]
+        const data:ICargoData = dataContext.state.cargo.filter((entry) => {return entry._id === i})[0]
         return(
             <div className="section details">
                 <div className="row"><b>ID:</b> {data._id} </div>
